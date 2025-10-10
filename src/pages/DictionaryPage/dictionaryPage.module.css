@@ -1,0 +1,204 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #3b2a00;
+    --muted-color: #6b4e16;
+    --primary: #d4a017;
+    --primary-hover: #b8860b;
+    --card-bg: #fffaf0;
+    --border-color: #e0c68c;
+}
+
+/* ===== TITLE & TOOLBAR (влево) ===== */
+.dictTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 20px 40px; /* слева такой же отступ как у тулбара */
+    text-align: left;
+}
+
+.dictToolbar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    margin: 0 0 40px 40px; /* прижали к левому краю */
+}
+
+/* кнопки-пилюли */
+.dictPill {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.06s ease;
+}
+.dictPill:hover {
+    background-color: var(--primary-hover);
+    color: #fff;
+}
+.dictPillPrimary {
+    background-color: var(--primary);
+    color: #fff;
+}
+.dictPillPrimary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* поиск */
+.dictSearch {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 8px 12px;
+    outline: none;
+    font-size: 14px;
+    width: 220px;
+    background: #fffdf7;
+}
+
+/* ===== PREVIEW ===== */
+.dictPreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.dictArrow {
+    background-color: var(--primary);
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.dictArrow:hover {
+    background-color: var(--primary-hover);
+}
+
+.dictPreviewCard {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 24px 32px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    min-width: 480px;
+}
+
+.dictPreviewImg {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: #fffef6;
+}
+
+.dictPreviewWord {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 6px;
+}
+
+.dictPreviewMeaning {
+    font-size: 16px;
+    color: var(--muted-color);
+    margin: 0;
+}
+
+/* ===== LIST ===== */
+.dictList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0;
+    list-style: none;
+}
+
+.dictRow {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 40px; /* картинка | слово | значение | ⋯ */
+    align-items: center;
+    gap: 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+}
+
+.dictThumb {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    background: #fffef6;
+}
+
+.dictWord {
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.dictMeaning {
+    color: var(--muted-color);
+    font-size: 15px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(0, 0, 0, 0.08);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.dictKebab {
+    justify-self: end;
+    font-size: 22px;
+    color: var(--muted-color);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+.dictKebab:hover {
+    background-color: rgba(212, 160, 23, 0.15);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .dictPreviewCard {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-width: auto;
+    }
+
+    .dictList { padding: 0 16px; }
+
+    .dictRow {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto;
+        row-gap: 8px;
+    }
+
+    .dictMeaning {
+        border-left: none;
+        padding-left: 0;
+    }
+}

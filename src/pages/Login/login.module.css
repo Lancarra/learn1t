@@ -1,0 +1,80 @@
+.authContainer {
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+    padding: 40px 20px;
+    background: var(--bg-color);
+    margin: 0 auto;
+}
+
+/* форма */
+.authContainer form {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--input-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* заголовок */
+.formTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+/* инпуты */
+.authContainer input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* кнопка */
+.authContainer button {
+    width: 100%;
+    background-color: var(--primary);
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.06s ease;
+}
+.authContainer button:hover { background-color: var(--primary-hover); }
+.authContainer button:active { transform: translateY(1px); }
+
+/* футер */
+.authFooter {
+    margin-top: 0.5rem;
+    text-align: center;
+    line-height: 1.4;
+}
+.authFooter p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+.authFooter a {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.authFooter a:hover { text-decoration: underline; }

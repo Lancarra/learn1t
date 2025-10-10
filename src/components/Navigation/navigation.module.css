@@ -1,0 +1,101 @@
+.ulList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ulItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+.ulLink {
+    color: #8a6d03;
+    text-decoration: none;
+    transition: color .2s ease, background-color .2s ease;
+    padding: 4px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ulLink:hover {
+    color: #6b5202;
+    background-color: rgba(212,160,23,.12);
+    text-decoration: none;
+}
+
+.isActive {
+    color: #6b5202;
+    font-weight: 600;
+    background: rgba(212,160,23,.18);
+    border: 1px solid rgba(224,198,140,.7);
+}
+
+.ulSep {
+    opacity: .6;
+    color: #8a6d03;
+    font-size: .8rem;
+}
+
+.ulEllipsis { position: relative; }
+.ulEllipsis details > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #8a6d03;
+    font-size: .8rem;
+    background: rgba(212,160,23,.12);
+}
+.ulEllipsis details[open] > summary,
+.ulEllipsis details > summary:hover {
+    background: rgba(212,160,23,.2);
+    color: #6b5202;
+}
+.ulEllipsis details > summary::-webkit-details-marker { display: none; }
+
+.ulMenu {
+    position: absolute;
+    z-index: 10;
+    margin-top: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    min-width: 180px;
+    padding: 6px;
+}
+.ulMenu ul {
+    max-height: 220px;
+    overflow: auto;
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+}
+.ulMenuLink {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: .85rem;
+    color: #8a6d03;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ulMenuLink:hover {
+    background: rgba(212,160,23,.12);
+    color: #6b5202;
+}
+
+@media (max-width: 640px) {
+    .headerBreadcrumbs { padding: 6px 12px; font-size: .8rem; }
+    .ulLink { max-width: 120px; }
+}

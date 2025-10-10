@@ -1,0 +1,15 @@
+:root {
+    --bg-color:#ffffff; --text-color:#3b2a00; --card-bg:#fffaf0;
+    --primary:#d4a017; --primary-hover:#b8860b;
+    --input-bg:#fffdf7; --input-border:#e0c68c;
+    --link-color:#996515; --icon-color:#b8860b; --muted:#6b4e16;
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+    --shadow-hover:0 12px 30px rgba(0,0,0,.10);
+}
+[data-theme="dark"]{
+    --bg-color:#13100b; --text-color:#f3e9d2; --card-bg:#1e1a12;
+    --primary:#d4a017; --primary-hover:#b8860b; --input-bg:#1a160f;
+    --input-border:#3c321c; --link-color:#ffd27a; --icon-color:#e0b04e;
+    --muted:#d2c29a; --shadow:0 10px 25px rgba(0,0,0,.5);
+    --shadow-hover:0 12px 30px rgba(0,0,0,.55);
+}

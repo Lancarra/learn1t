@@ -1,0 +1,89 @@
+.module-card {
+    background-color: var(--card-bg, #fffaf0);
+    padding: 24px 28px;
+    border-radius: 14px;
+    border: 1px solid var(--input-border, #e0c68c);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+.module-card:hover {
+    box-shadow: 0 14px 50px rgba(0, 0, 0, 0.1);
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.module-link {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    gap: 20px;
+    flex: 1;
+}
+
+.module-info h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--text-color, #3b2a00);
+}
+
+.module-info p {
+    font-size: 14px;
+    margin: 0;
+    color: #6b4e16;
+}
+
+.dropdown { position: relative; }
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 6px;
+    line-height: 1;
+    color: var(--text-color, #3b2a00);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 28px;
+    right: 0;
+    background: var(--card-bg, #fffaf0);
+    border: 1px solid var(--input-border, #e0c68c);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 10;
+    padding: 4px 0;
+}
+
+.dropdown-menu button {
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 14px;
+    color: var(--text-color, #3b2a00);
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.dropdown-menu button:hover { background-color: #fdf4d7; }
+
+/* адаптив под мобильные карточки */
+@media (max-width: 768px) {
+    .module-card { padding: 20px; }
+}

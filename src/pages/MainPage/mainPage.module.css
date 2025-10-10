@@ -1,0 +1,58 @@
+.wrapper{
+    height:90vh; /* фиксированная высота без скролла */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:var(--bg-color);
+    padding:0 20px;
+    overflow:hidden; /* убираем вертикальный скролл */
+}
+
+
+.title{
+    font-size:3.6rem;
+    font-weight:700;
+    line-height:1.3;
+    margin-bottom:1.2rem;
+    color:var(--text-color);
+}
+
+
+.subtext{
+    font-size:1.3rem;
+    font-weight:400;
+    color:#6b4e16;
+    max-width:800px;
+    margin:0 auto 2.5rem;
+    line-height:1.6;
+}
+
+
+.button{
+    background:var(--primary);
+    border:none;
+    border-radius:12px;
+    padding:14px 28px; /* крупнее кнопка */
+    font-size:1.25rem;
+    font-weight:600;
+    color:#fff;
+    cursor:pointer;
+    transition:background .2s ease, transform .06s ease, box-shadow .2s ease;
+    box-shadow:0 8px 22px rgba(212,160,23,.25);
+}
+.button:hover{
+    background:var(--primary-hover);
+    box-shadow:0 10px 26px rgba(212,160,23,.3);
+}
+.button:active{
+    transform:translateY(1px);
+}
+
+
+@media (max-width:600px){
+    .title{ font-size:2rem; }
+    .subtext{ font-size:1rem; margin-bottom:20px; }
+    .button{ width:90%; padding:16px; font-size:1.1rem; }
+}
