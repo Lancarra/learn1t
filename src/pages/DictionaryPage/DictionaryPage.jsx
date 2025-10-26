@@ -9,6 +9,7 @@ import {CreateNewQuizForm} from "../../components/CreateNewQuizForm/CreateNewQui
 
 export const DictionaryPage = () => {
     const { id } = useParams();
+    localStorage.setItem("id", JSON.stringify(id));
     const { data } = useGetDefinitionsQuery(id);
     const [isShow, setIsShow] = useState(false);
     const [search, setSearch] = useState("");
@@ -37,6 +38,8 @@ export const DictionaryPage = () => {
 
     const currentItem = data?.definitions?.[currentIndex];
 
+    const definitions = data?.definitions?.filter(({word})=>word.toLowerCase().includes(search.toLowerCase()))
+
     return (
         <>
             <h1 className={styles.dictTitle}>Word in Dictionary ...</h1>
@@ -51,57 +54,43 @@ export const DictionaryPage = () => {
                 </button>
                 <button type="button" className={styles.dictPill} onClick={toggleDefinitionModal}>
                     Learn definitions
-
-{/*
-                    <NavLink to={`/quiz/${data?.definitions[0].dictionaryId}}`}>Learn definitions</NavLink>
-*/}
-
                     </button>
                 <button type="button" onClick={toggleShow} className={styles.dictPill}>Find definition</button>
                 {isShow && (
-                    <input type="text" value={search} onChange={handleInputChange} className={styles.dictSearch}
-                        placeholder="Search..."
+                    <input
+                        value ={search} onChange={handleInputChange}
+                        className={styles.searchInput}
+                        type="text"
+                        placeholder="Enter a definition name..."
                     />
                 )}
             </div>
-
             <div className={styles.dictPreview}>
-                <button type="button" onClick={handlePrev} className={styles.dictArrow}>←</button>
+            <button type="button" onClick={handlePrev} className={styles.dictArrow}>←</button>
 
-                {/*<div className={styles.dictPreviewCard}>
-                    <img src={currentItem?.imageURL} alt="" className={styles.dictPreviewImg}/>
-                    <p className={styles.dictPreviewWord}>{currentItem?.word}</p>
-
-                    <p className={styles.dictPreviewMeaning}>{currentItem?.meaning}</p>
-
-                </div>*/}
-                <div
-                    className={`${styles.dictPreviewCard} ${styles.flipCard}`}
-                    onClick={toggleFlip}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleFlip()}
-                    aria-pressed={isFlipped}
-                    title="Click to flip"
-                >
-                    <div className={`${styles.flipInner} ${isFlipped ? styles.flipped : ""}`}>
-                        <div className={styles.flipFront}>
-                            <img src={currentItem?.imageURL} alt="" className={styles.dictPreviewImg}/>
-                            <p className={styles.dictPreviewWord}>{currentItem?.word}</p>
-                        </div>
-
-                        <div className={styles.flipBack}>
-                            <img src={currentItem?.imageURL} alt="" className={styles.dictPreviewImg}/>
-                            <p className={styles.dictPreviewMeaning}>{currentItem?.meaning}</p>
-                        </div>
+            <div
+                className={`${styles.flipCard}`}
+                onClick={toggleFlip}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleFlip()}
+            >
+                <div className={`${styles.flipInner} ${isFlipped ? styles.flipped : ""}`}>
+                    <div className={styles.flipFront}>
+                        <img src={currentItem?.imageURL} alt="" />
+                        <p className={styles.dictPreviewWord}>{currentItem?.word}</p>
+                    </div>
+                    <div className={styles.flipBack}>
+                        <img src={currentItem?.imageURL} alt="" />
+                        <p className={styles.dictPreviewMeaning}>{currentItem?.meaning}</p>
                     </div>
                 </div>
-
-                <button type="button" onClick={handleNext} className={styles.dictArrow}>→</button>
             </div>
 
+            <button type="button" onClick={handleNext} className={styles.dictArrow}>→</button>
+        </div>
             <ul className={styles.dictList}>
-                {data?.definitions?.map(({ id, word, meaning, blobId, imageURL, dictionaryId }) => (
+                {definitions?.map(({ id, word, meaning, blobId, imageURL }) => (
                     <DictionaryCardItem id={id} word={word} meaning={meaning} blobId={blobId} imageURL={imageURL} />
                 ))}
             </ul>
@@ -112,7 +101,7 @@ export const DictionaryPage = () => {
                 </Modal>
             )}
             {isShowDefinitionModal && <Modal toggleModal={toggleDefinitionModal}>
-                <CreateNewQuizForm togglemodal={toggleDefinitionModal} dictionaryId={id} definitionId={data?.definitions[0].id}/>
+                <CreateNewQuizForm togglemodal={toggleDefinitionModal} dictionaryId={id}/>
             </Modal>}
         </>
     );

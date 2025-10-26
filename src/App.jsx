@@ -12,29 +12,34 @@ import {useEffect} from "react";
 import {FolderPage} from "./pages/FolderPage/FolderPage.jsx";
 import {DictionaryPage} from "./pages/DictionaryPage/DictionaryPage.jsx";
 import {LearnDefinitionPage} from "./pages/LearnDefinitionPage/LearnDefinitionPage.jsx";
+import {ResultPage} from "./pages/ResultPage/ResultPage.jsx";
+import {ProfilePage} from "./pages/ProfilePage/ProfilePage.jsx";
+import {RestrictedRoute} from "./components/CustomRouts/RestrictedRoute/RestrictedRoute.jsx";
+import {PrivateRoute} from "./components/CustomRouts/PrivateRoute/PrivateRoute.jsx";
 
 function App() {
 
     const dispatch = useDispatch();
-    const {isRefreshing} = useAuth();
+    const {refresing} = useAuth();
 
     useEffect(() => {
         dispatch(refreshUser());
     },[dispatch])
-
-  return ( isRefreshing? <p>
+  return ( refresing? <p>
           ...
           </p>:
     <Routes>
         <Route path="/" element={<Layout/>}>
         <Route path="/" element={<MainPage/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/module/:id" element={<ModulePage/>} />
-        <Route path="/folder/:id" element={<FolderPage/>}/>
-        <Route path="/dictionary/:id" element={<DictionaryPage/>}/>
-        <Route path="/quiz/:cardId" element={<LearnDefinitionPage/>}/>
+        <Route path="/login" element={<RestrictedRoute redirectTo="/dashboard" component={<Login/>}/>} />
+        <Route path="/register" element={<RestrictedRoute redirectTo="/dashboard" component={<Register/>}/>}/>
+        <Route path="/dashboard" element={<PrivateRoute redirectTo="/" component={<Dashboard/>} />} />
+        <Route path="/dashboard/module/:id" element={<PrivateRoute redirectTo="/" component={<ModulePage/>}/>} />
+        <Route path="/folder/:id" element={<PrivateRoute redirectTo="/" component={<FolderPage/>}/>}/>
+        <Route path="/dictionary/:id" element={<PrivateRoute redirectTo="/" component={<DictionaryPage/>}/>}/>
+        <Route path="/quiz/:cardId" element={<PrivateRoute redirectTo="/" component={<LearnDefinitionPage/>}/>}/>
+        <Route path="/quiz/result/:cardId" element={<PrivateRoute redirectTo="/" component={<ResultPage/>}/>}/>
+        <Route path="/profile" element={<PrivateRoute redirectTo="/" component={<ProfilePage/>}/>}/>
         </Route>
     </Routes>
   )

@@ -54,8 +54,16 @@ export const quizAPI = createApi({
                 body: value
             }),
             invalidatesTags: ['quiz'],
+        }),
+        checkAnswer: builder.mutation({
+            query: (value) => ({
+                method: "POST",
+                url:"/quiz/check-answer",
+                body: value
+            }),
+            invalidatesTags: ['quiz'],
         })
 
     })
 });
-export const {useGetQuizQuery, useAddQuizMutation, useUpdateQuizMutation, useCheckQuizMutation, useAnswerQuizMutation} = quizAPI;
+export const {useGetQuizQuery, useAddQuizMutation, useUpdateQuizMutation, useCheckQuizMutation, useAnswerQuizMutation, useCheckAnswerMutation} = quizAPI;

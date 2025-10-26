@@ -1,0 +1,54 @@
+:root{
+    --bg-color:#ffffff; --text-color:#3b2a00; --card-bg:#fffaf0;
+    --primary:#d4a017; --primary-hover:#b8860b;
+    --input-bg:#fffdf7; --input-border:#e0c68c;
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+    --shadow-hover:0 12px 30px rgba(0,0,0,.10);
+    --ok: color-mix(in srgb, var(--primary) 26%, #22c55e);
+    --bad: color-mix(in srgb, #ef4444 22%, var(--card-bg));
+}
+[data-theme="dark"]{
+    --bg-color:#13100b; --text-color:#f3e9d2; --card-bg:#1e1a12;
+    --primary:#d4a017; --primary-hover:#b8860b;
+    --input-bg:#1a160f; --input-border:#3c321c;
+    --shadow:0 10px 25px rgba(0,0,0,.5);
+    --shadow-hover:0 12px 30px rgba(0,0,0,.55);
+    --ok: color-mix(in srgb, var(--primary) 34%, #22c55e);
+    --bad: color-mix(in srgb, #ef4444 26%, var(--card-bg));
+}
+
+.option{
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: var(--shadow);
+    font-size: clamp(16px, 2.2vw, 18px);
+    user-select: none;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+    outline: none;
+}
+.option:hover{
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+.option:active{ transform: translateY(0); }
+.option:focus-visible{
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 40%, transparent);
+    border-color: var(--primary);
+}
+
+/* подсветка ответа */
+.optionCorrect{
+    background: color-mix(in srgb, var(--ok) 18%, var(--input-bg));
+    border-color: color-mix(in srgb, var(--ok) 55%, var(--input-border));
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--ok) 35%, transparent);
+}
+.optionWrong{
+    background: color-mix(in srgb, var(--bad) 18%, var(--input-bg));
+    border-color: color-mix(in srgb, var(--bad) 55%, var(--input-border));
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--bad) 35%, transparent);
+}

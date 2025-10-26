@@ -5,28 +5,33 @@ import {Modal} from "../../components/Modal/Modal.jsx";
 import {NewFolderForm} from "../../components/NewFolderForm/NewFolderForm.jsx";
 import {useState} from "react";
 import {ItemCard} from "../../components/ItemCard/ItemCard.jsx";
-
+import {useLocation} from "react-router-dom";
 
 export const ModulePage = () => {
-const {id} = useParams();
-const {data} = useGetFoldersQuery(id);
+    const {pathname} = useLocation();
+    const pathName = pathname.split("/");
+    const {id} = useParams();
+    const {data} = useGetFoldersQuery(id);
 
-const [isOpenModal, setIsOpenModal] = useState(false);
-const [isShow, setIsShow] = useState(false);
-const toggleShow = () => {
-    setIsShow(!isShow);
-}
-const toggleModal = () => {
-    setIsOpenModal(!isOpenModal);
-}
-console.log(data);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isShow, setIsShow] = useState(false);
+    const toggleShow = () => {
+        setIsShow(!isShow);
+    }
+    const toggleModal = () => {
+        setIsOpenModal(!isOpenModal);
+    }
+
     const [keyWord, setKeyWord] = useState("");
     const handleInputChange = (e) => {
         setKeyWord(e.target.value);
     }
     const folders = data?.folders.filter(({name})=>name.toLowerCase().includes(keyWord.toLowerCase()))
-
-    return<><div className={styles["dashboard-page"]}>
+    return<>
+        <p>
+            {pathName.slice(0,3).join("/")}
+    </p>
+        <div className={styles["dashboard-page"]}>
         <h1 className={styles["dashboard-greeting"]}>Here are your folders. </h1>
         <button type = "button" onClick={toggleModal}>Create new folder</button>
         <button type = "button" onClick={toggleShow}>Find a folder</button>

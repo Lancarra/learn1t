@@ -1,29 +1,86 @@
-import {useParams} from "react-router-dom";
-import {useGetQuizQuery} from "../../redux/quiz/quizOperations.js";
+import {NavLink, useParams} from "react-router-dom";
+import {useCheckAnswerMutation, useGetQuizQuery} from "../../redux/quiz/quizOperations.js";
 import {useGetDefinitionByIdQuery} from "../../redux/definitionList/definitionaList.js";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {VariantItem} from "./components/VariantItem/VariantItem.jsx";
-
+import styles from "./learnDefinitionPage.module.css";
+import {Modal} from "../../components/Modal/Modal.jsx";
+import {FinishQuiz} from "../../components/FinishQuiz/FinishQuiz.jsx";
+import localStorage from "redux-persist/es/storage";
+const answers = []
 
 export const LearnDefinitionPage = () => {
+
     const {cardId} = useParams();
+    localStorage.setItem("cardId", cardId);
     const {data} = useGetQuizQuery(cardId);
     const [index, setIndex] = useState(0);
+    const [checkAnswer] = useCheckAnswerMutation();
+    const [isShowModal, setIsShowModal] = useState(false);
 
-/*
-        const randomIndex = Math.floor(Math.random() * data?.testUnits.length);
-*/
     const randomCard = data?.testUnits[index];
     const {data:definition} = useGetDefinitionByIdQuery(randomCard?.definitionId);
 
-        return <>
-            <div>
-                <img src ={definition?.imageURL}/>
-                <p>{definition?.word}</p>
+    const [maxProgress, setMaxProgress] = useState(0);
+
+    const toggleModal = () => {
+        setIsShowModal(!isShowModal);
+    }
+    const handleAnswer = async (value) =>{
+
+        await checkAnswer({ definitionId: randomCard?.definitionId, userAnswer: value });
+        setMaxProgress(prev => {
+            if(prev === data?.testUnits.length){
+                return prev;
+            }
+            if (prev === data?.testUnits.length -1 ){
+                toggleModal()
+            }
+            return prev + 1;
+        })
+        answers.push({ testUnitId: randomCard?.testUnitId, answer: value });
+        localStorage.setItem("answer", JSON.stringify(answers));
+        if (answers.length === data?.testUnits.length) {
+            answers.length = 0
+            setMaxProgress(0)
+        }
+    }
+
+    return (
+        <>
+        <div className={styles.lp}>
+            <div className={styles.inner}>
+                <h1 className={styles.title}>Learn Words</h1>
+                <div className={styles.rule}>
+                    <div
+                        className={styles.progress}
+                        style={{ width: `${(maxProgress/data?.testUnits.length)*100 }%` }}
+                    />
+                </div>
+                <section className={styles.card}>
+                    <div className={styles.thumb}>
+                        {definition?.imageURL && (
+                            <img src={definition.imageURL} alt={definition?.word || "image"} />
+                        )}
+                    </div>
+                    <div className={styles.word}>{definition?.word}</div>
+                </section>
+
+                <ul className={styles.grid}>
+                    {randomCard?.additionalAnswers.map((value, id) => (
+                        <VariantItem onClick={handleAnswer}
+                            key={id}
+                            value={value}
+                            meaning={definition?.meaning}
+                            index={index}
+                            setIndex={setIndex}
+                            dataLength={data?.testUnits.length - 1}
+                        />
+                    ))}
+                </ul>
             </div>
-            <ul>
-                {randomCard?.additionalAnswers.map((value, id)=><VariantItem key = {id} value={value} meaning={definition?.meaning} index = {index}
-                setIndex={setIndex} dataLength={data?.testUnits.length-1}/>)}
-            </ul>
+        </div>
+            {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} dictionaryId={cardId} /></Modal>}
         </>
-}
+    );
+};

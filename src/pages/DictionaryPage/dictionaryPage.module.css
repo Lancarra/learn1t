@@ -8,12 +8,12 @@
     --border-color: #e0c68c;
 }
 
-/* ===== TITLE & TOOLBAR (влево) ===== */
+
 .dictTitle {
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-color);
-    margin: 0 0 20px 40px; /* слева такой же отступ как у тулбара */
+    margin: 0 0 20px 40px;
     text-align: left;
 }
 
@@ -21,10 +21,10 @@
     display: flex;
     justify-content: flex-start;
     gap: 12px;
-    margin: 0 0 40px 40px; /* прижали к левому краю */
+    margin: 0 0 40px 40px;
 }
 
-/* кнопки-пилюли */
+
 .dictPill {
     background-color: var(--card-bg);
     color: var(--text-color);
@@ -47,7 +47,7 @@
     background-color: var(--primary-hover);
 }
 
-/* поиск */
+
 .dictSearch {
     border: 1px solid var(--border-color);
     border-radius: 10px;
@@ -57,7 +57,15 @@
     width: 220px;
     background: #fffdf7;
 }
-
+.searchInput{
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 8px 12px;
+    outline: none;
+    font-size: 14px;
+    width: 220px;
+    background: #fffdf7;
+}
 /* ===== PREVIEW ===== */
 .dictPreview {
     display: flex;
@@ -128,7 +136,7 @@
 
 .dictRow {
     display: grid;
-    grid-template-columns: 100px 1fr 1fr 40px; /* картинка | слово | значение | ⋯ */
+    grid-template-columns: 100px 1fr 1fr 40px;
     align-items: center;
     gap: 20px;
     background-color: var(--card-bg);
@@ -179,7 +187,56 @@
 .dictKebab:hover {
     background-color: rgba(212, 160, 23, 0.15);
 }
+/* === FLIP ANIMATION === */
+.flipCard {
+    perspective: 1200px;
+    cursor: pointer;
+    width: 480px;
+    height: 220px;
+    position: relative;
+}
 
+.flipInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.flipFront,
+.flipBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.flipBack {
+    transform: rotateY(180deg);
+}
+
+.flipFront img,
+.flipBack img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    margin-bottom: 12px;
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .dictPreviewCard {

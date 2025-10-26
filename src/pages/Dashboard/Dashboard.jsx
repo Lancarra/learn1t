@@ -5,7 +5,6 @@ import {Modal} from "../../components/Modal/Modal.jsx";
 import {NewModuleForm} from "../../components/NewModuleForm/NewModuleForm.jsx";
 import {useGetModulesQuery} from "../../redux/modules/moduleOperations.js";
 import { ItemCard } from "../../components/ItemCard/ItemCard.jsx";
-import {ChangeModuleForm} from "../../components/ChangeModuleForm/ChangeModuleForm.jsx";
 
 export const Dashboard = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
@@ -18,7 +17,7 @@ export const Dashboard = () => {
     const handleInputChange = (e) => {
         setKeyWord(e.target.value);
     }
-//TODO
+
     const modules = data?.modules.filter(({name})=>name.toLowerCase().includes(keyWord.toLowerCase()))
 
     return (
@@ -35,7 +34,7 @@ export const Dashboard = () => {
             </div>
             <ul className={styles["modules-grid"]}>
                 {modules?.map(({ name, id }) => (
-                    <ItemCard key={id} id={id} name={name} routeBase="module" />
+                    <ItemCard key={id} id={id} name={name} routeBase="dashboard/module" />
                 ))}
             </ul>
             {isOpenModal && (

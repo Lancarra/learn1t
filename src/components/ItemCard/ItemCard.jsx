@@ -24,7 +24,7 @@ export const ItemCard = ({ id, name, routeBase }) => {
 
     const handleDelete = () => {
         switch (routeBase) {
-            case "module":
+            case "dashboard/module":
                 deleteModule({id});
                 return;
             case "folder":

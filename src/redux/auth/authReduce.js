@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {login, register, logout, refreshUser} from "./authOperations.js"
 
 const initialState = {
-    user:{name:null,email:null, userId:null},
+    user:{name:null,email:null, userId:null, blobId:null},
     token:null,
     isLoggedIn:false,
     isRefreshing:false
@@ -18,6 +18,7 @@ export const authSlice = createSlice({
             state.user.userId = payload.userId;
             state.user.email = payload.response.email;
             state.token = payload.response.token;
+            state.user.blobId = payload.blobId;
             state.isLoggedIn = true;
             state.isRefreshing = false;
         })
@@ -28,6 +29,7 @@ export const authSlice = createSlice({
             state.user.email = payload.email;
             state.user.userId = payload.userId;
             state.token = payload.token;
+            state.user.blobId = payload.blobId;
             state.isLoggedIn = true;
             state.isRefreshing = false;
         })
@@ -42,6 +44,7 @@ export const authSlice = createSlice({
             state.user.name = payload.username;
             state.user.email = payload.email;
             state.user.userId = payload.userId;
+            state.user.blobId = payload.blobId;
             state.isLoggedIn = true;
             state.isRefreshing = false;
         })

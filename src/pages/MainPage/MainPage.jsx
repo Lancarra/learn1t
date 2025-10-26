@@ -17,5 +17,6 @@ export const MainPage = () => {
             </p>
             <button type="button" className={styles.button} onClick={handleClick}> Don't have account? Register now!</button>
         </div>
+
     </>)
 }
