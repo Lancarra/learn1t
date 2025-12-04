@@ -1,31 +1,46 @@
-import { Link } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import { Navigation } from "../Navigation/Navigation.jsx";
-import styles from "./header.module.css"
-import {useAuth} from "../../hooks/useAuth.js";
+import styles from "./header.module.css";
+import { useAuth } from "../../hooks/useAuth.js";
 
 export const Header = () => {
-    const {loggedIn} = useAuth();
+    const { loggedIn, user } = useAuth();
     const handleLogout = () => {
         localStorage.removeItem("persist:auth");
         window.location.reload();
-    }
+    };
+    console.log("new", user.roleName);
     return (
-    <div className={styles.headerWrap}>
-        <div className={styles.topbarContainer}>
-            <header className={styles.topbar}>
-                <div className={styles.topbarLeft}>
-                    <Link to="/" className={styles.brand}>LearnIT</Link>
-                </div>
-                {!loggedIn && <div className={styles.topbarRight}>
-                    <Link to="/login" className={styles.btnLogin}>Log in</Link>
-                </div>}
-                {loggedIn && <div><Link to="/profile">Profile</Link></div>}
-                {loggedIn && <button type="button" onClick={handleLogout}>Log Out</button>}
-            </header>
-        </div>
+        <div className={styles.headerWrap}>
+            <div className={styles.topbarContainer}>
+                <header className={styles.topbar}>
+                    <div className={styles.topbarLeft}>
+                        <Link to="/dashboard" className={styles.brand}>LearnIT</Link>
+                    </div>
 
-        <div className={styles.navContainer}>
-            <Navigation />
+                    <div className={styles.topbarRight}>
+                        {!loggedIn && (
+                            <Link to="/login" className={styles.btnLogin}>Log in</Link>
+                        )}
+                        {loggedIn && (
+                            <>
+                                <NavLink to="/profile" className={styles.profileBtn}>Profile</NavLink>
+                                <button type="button" onClick={handleLogout} className={styles.logoutBtn}>
+                                    Log Out
+                                </button>
+                            </>
+                        )}
+                        {user.roleName === "Admin"  && <NavLink to = "/admin/panel">Admin Panel</NavLink>}
+                        {user.roleName === "Admin;"  && <NavLink to = "/admin/panel">Admin Panel</NavLink>}
+                    </div>
+                </header>
+            </div>
+
+            <div className={styles.crumbsBar}>
+                <div className={styles.crumbsInner}>
+                    <Navigation />
+                </div>
+            </div>
         </div>
-    </div>
-)};
+    );
+};

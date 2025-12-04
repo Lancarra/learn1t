@@ -16,6 +16,12 @@ import {ResultPage} from "./pages/ResultPage/ResultPage.jsx";
 import {ProfilePage} from "./pages/ProfilePage/ProfilePage.jsx";
 import {RestrictedRoute} from "./components/CustomRouts/RestrictedRoute/RestrictedRoute.jsx";
 import {PrivateRoute} from "./components/CustomRouts/PrivateRoute/PrivateRoute.jsx";
+import {AdminPanel} from "./pages/AdminPanel/AdminPanel.jsx";
+import {AdminStudents} from "./pages/AdminStudents/AdminStudents.jsx";
+import {AdminTeachers} from "./pages/AdminTeachers/AdminTeachers.jsx";
+import {TeacherPanel} from "./pages/TeacherPanel/TeacherPanel.jsx";
+import {ContinueLearnDefinitionPage} from "./pages/ContinueLearnDefinitionPage/ContinueLearnDefinitionPage.jsx";
+import {InfoTestPage} from "./pages/InfoTestPage/InfoTestPage.jsx";
 
 function App() {
 
@@ -38,8 +44,15 @@ function App() {
         <Route path="/folder/:id" element={<PrivateRoute redirectTo="/" component={<FolderPage/>}/>}/>
         <Route path="/dictionary/:id" element={<PrivateRoute redirectTo="/" component={<DictionaryPage/>}/>}/>
         <Route path="/quiz/:cardId" element={<PrivateRoute redirectTo="/" component={<LearnDefinitionPage/>}/>}/>
+        <Route path="/test/info/:cardId" element={<PrivateRoute redirectTo="/" component={<InfoTestPage/>}/>}/>
+        <Route path="/secondquiz/:cardId" element={<PrivateRoute redirectTo="/" component={<ContinueLearnDefinitionPage/>}/>}/>
         <Route path="/quiz/result/:cardId" element={<PrivateRoute redirectTo="/" component={<ResultPage/>}/>}/>
         <Route path="/profile" element={<PrivateRoute redirectTo="/" component={<ProfilePage/>}/>}/>
+        <Route path="/admin/panel" element={<PrivateRoute redirectTo="/" component={<AdminPanel/>}/>}/>
+        <Route path="/admin/students" element={<PrivateRoute redirectTo="/" component={<AdminStudents/>}/>}/>
+        <Route path="/admin/teachers" element={<PrivateRoute redirectTo="/" component={<AdminTeachers/>}/>}/>
+        <Route path="/admin/teacher/:teacherId" element={<PrivateRoute redirectTo="/" component={<TeacherPanel/>}/>}/>
+        <Route path="/teacher/:teacherId" element={<PrivateRoute redirectTo="/" component={<TeacherPanel/>}/>}/>
         </Route>
     </Routes>
   )

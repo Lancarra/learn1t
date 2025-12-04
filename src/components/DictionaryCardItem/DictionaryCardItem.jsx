@@ -12,28 +12,41 @@ export const DictionaryCardItem = ({id, word, meaning, imageURL, blobId}) => {
     const [deleteDefinition] = useDeleteDefinitionMutation();
 
     const handleDelete = () => {
-      deleteDefinition({id});
-    }
+        deleteDefinition({ id });
+    };
 
-    return <>
-        <li className={styles.dictRow}>
-        <img src={imageURL || blobId} alt={word} className={styles.dictThumb} />
-        <p className={styles.dictWord}>{word}</p>
-        <p className={styles.dictMeaning}>{meaning}</p>
-            <div className={styles["dropdown"]}>
-                <button className={styles["dropdown-toggle"]} onClick={toggleShowBtn}>⋯</button>
-                {isShowButton && (
-                    <div className={styles["dropdown-menu"]}>
-                        <button type="button" onClick={toggleShowModal}>Edit</button>
-                        <button type="button" onClick={handleDelete}>Delete</button>
-                    </div>
-                )}
-            </div>
-    </li>
-        {isShowModal && (
-            <Modal toggleModal={toggleShowModal}>
-                <ChangeDefinitionForm togglemodal={toggleShowModal} id={id} name={word} img={imageURL} mean={meaning} />
-            </Modal>
-        )}
-    </>
-}
+    const imgSrc =
+        imageURL ||
+        (blobId ? `http://127.0.0.1:10000/devstoreaccount1/definition-images/${blobId}` : null);
+
+    return (
+        <>
+            <li className={styles.dictRow}>
+                {imgSrc ? (
+                    <img src={imgSrc} alt={word} className={styles.dictThumb} />
+                ) : (
+                    <div className={styles.dictThumbPlaceholder} />
+                    )}
+
+                <p className={styles.dictWord}>{word}</p>
+                <p className={styles.dictMeaning}>{meaning}</p>
+
+                <div className={styles["dropdown"]}>
+                    <button className={styles["dropdown-toggle"]} onClick={toggleShowBtn}>⋯</button>
+                    {isShowButton && (
+                        <div className={styles["dropdown-menu"]}>
+                            <button type="button" onClick={toggleShowModal}>Edit</button>
+                            <button type="button" onClick={handleDelete}>Delete</button>
+                        </div>
+                    )}
+                </div>
+            </li>
+
+            {isShowModal && (
+                <Modal toggleModal={toggleShowModal}>
+                    <ChangeDefinitionForm togglemodal={toggleShowModal} id={id} name={word} img={imageURL} mean={meaning}/>
+                </Modal>
+            )}
+        </>
+    );
+};

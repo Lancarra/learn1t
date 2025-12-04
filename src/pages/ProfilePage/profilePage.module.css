@@ -1,0 +1,172 @@
+:root {
+    /* палитра как на других страницах */
+    --bg-color: #ffffff;
+    --text-color: #3b2a00;
+    --card-bg: #fffaf0;
+    --input-border: #e0c68c;
+    --primary: #d4a017;
+    --primary-hover: #b8860b;
+}
+
+/* страница */
+.profilePage {
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 60px 40px;
+    box-sizing: border-box;
+}
+
+/* верх: аватар + иконки */
+.profileHeader {
+    display: flex;
+    align-items: center;           /* аватар и иконки по центру по вертикали */
+    justify-content: center;       /* выравниваем их по центру страницы */
+    gap: 60px;                     /* немного увеличил отступ между ними */
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+.profileAvatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--card-bg);
+    border: 2px solid var(--input-border);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* сетка иконок */
+.profileIcons {
+    list-style: none;
+    margin: 0;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    gap: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.profileIconItem {
+    display: flex;
+}
+.profileIcons img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fffdf7;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+.profileIcons img:hover {
+    transform: scale(1.05);
+}
+
+/* форма */
+.profileForm {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+}
+
+.profileField {
+    background-color: var(--card-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profileField label {
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 15px;
+}
+
+.profileField input {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background-color: #fffdf7;
+    color: var(--text-color);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.profileField input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.25);
+}
+
+/* кнопка */
+.profileSubmit {
+    align-self: end;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.06s ease;
+    box-shadow: 0 10px 30px rgba(212, 160, 23, 0.15);
+}
+.profileSubmit:hover {
+    background-color: var(--primary-hover);
+}
+.profileSubmit:active {
+    transform: translateY(1px);
+}
+/* Кнопка добавления (+) */
+.addIcon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px dashed #c7b28a;
+    background: #fffdf7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 300;
+    color: #c7b28a;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    position: relative;
+}
+
+/* скрываем настоящий input */
+.addIcon input {
+    display: none;
+}
+
+/* hover эффект */
+.addIcon:hover {
+    background: #f5f0e6;
+    border-color: #d4a017;
+    color: #d4a017;
+}
+
+
+/* адаптив */
+@media (max-width: 900px) {
+    .profileHeader {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .profileIcons {
+        grid-template-columns: repeat(3, 60px);
+    }
+    .profilePage {
+        padding: 30px 20px;
+    }
+}

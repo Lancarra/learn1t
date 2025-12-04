@@ -16,6 +16,9 @@ import {
 import storage from 'redux-persist/lib/storage';
 import {definitionsAPI} from "./definitionList/definitionaList.js";
 import {quizAPI} from "./quiz/quizOperations.js";
+import {staticiconsAPI} from "./profile/staticIcons/staticIconsList.js";
+import {profilesAPI} from "./profile/profileOperations.js";
+import {adminAPI} from "./admin/AdminList.js";
 
 const middleware = getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -28,6 +31,9 @@ const middleware = getDefaultMiddleware => [
     dictionariesAPI.middleware,
     definitionsAPI.middleware,
     quizAPI.middleware,
+    staticiconsAPI.middleware,
+    profilesAPI.middleware,
+    adminAPI.middleware,
 ]
 const authPersistConfig = {
     key: 'auth',
@@ -42,6 +48,9 @@ export const store = configureStore({
         [dictionariesAPI.reducerPath]: dictionariesAPI.reducer,
         [definitionsAPI.reducerPath]: definitionsAPI.reducer,
         [quizAPI.reducerPath]: quizAPI.reducer,
+        [staticiconsAPI.reducerPath]: staticiconsAPI.reducer,
+        [profilesAPI.reducerPath]: profilesAPI.reducer,
+        [adminAPI.reducerPath]: adminAPI.reducer,
 
     },
     middleware,

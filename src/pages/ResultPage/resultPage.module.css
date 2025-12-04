@@ -1,0 +1,153 @@
+:root {
+    --bg: #faf8f3;
+    --card: #e5e5e5;
+    --text: #1b1b1b;
+    --correct: #00C49F;
+    --incorrect: #fa7070;
+    --radius: 16px;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Общий контейнер страницы */
+.result-page {
+    max-width: 1180px;
+    margin: 24px auto 64px;
+    padding: 0 24px 24px;
+}
+
+/* Верхняя часть — круг + текст */
+.result-header {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 36px;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+/* Блок справа с результатами */
+.info-wrap {
+    display: grid;
+    gap: 18px;
+}
+
+.info-box {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    font-size: 20px;
+    line-height: 1.35;
+    color: var(--text);
+    box-shadow: var(--shadow);
+}
+
+.info-box.secondary {
+    opacity: 0.95;
+}
+
+/* Полоски прогресса */
+.bars {
+    margin: 12px 0 28px;
+    display: grid;
+    gap: 18px;
+}
+
+.bar-row {
+    background: #efefef;
+    padding: 18px;
+    border-radius: calc(var(--radius) + 2px);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    gap: 18px;
+    box-shadow: var(--shadow);
+}
+
+.bar-title {
+    font-size: 20px;
+    color: var(--text);
+}
+
+.bar-track {
+    position: relative;
+    height: 48px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.bar-fill {
+    height: 100%;
+}
+
+.bar-fill.correct {
+    background: var(--correct);
+}
+
+.bar-fill.incorrect {
+    background: var(--incorrect);
+}
+
+/* Список слов с изображениями */
+.answers {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 20px;
+}
+
+.answer-card {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+.answer-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex: 0 0 auto;
+}
+
+.answer-text .word {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+
+.answer-text .meaning {
+    margin: 0;
+    color: #555;
+}
+.answer-card {
+    gap: 16px;
+    align-items: center;
+    border-radius: var(--radius);
+    padding: 16px;
+    border-left: 8px solid transparent; /* индикатор правильности */
+}
+
+.answer-card.correct { border-left-color: var(--correct); }
+.answer-card.incorrect { border-left-color: var(--incorrect); }
+
+
+.answer-text .word { font-size: 20px; font-weight: 600; margin: 0 0 6px; }
+.answer-text .meaning { margin: 0; color: #555; }
+.label { color: #777; }
+
+.good { color: var(--correct); font-weight: 600; }
+.bad  { color: var(--incorrect); font-weight: 600; }
+
+/* Адаптив */
+@media (max-width: 900px) {
+    .result-header {
+        grid-template-columns: 1fr;
+    }
+}

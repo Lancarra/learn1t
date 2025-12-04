@@ -23,6 +23,13 @@ export const modulesAPI = createApi({
             }),
             providesTags:['modules'],
         }),
+        getByTeacherIdModules: builder.query({
+            query: (teacherId) => ({
+                method: "GET",
+                url:`/course-module/get-by-teacher-id-modules/${teacherId}`
+            }),
+            providesTags:['modules'],
+        }),
         addModule: builder.mutation({
                 query: (value) => ({
                     method: "POST",
@@ -49,4 +56,4 @@ export const modulesAPI = createApi({
             }),
         })
 });
-export const {useGetModulesQuery, useAddModuleMutation, useUpdateModuleMutation, useDeleteModuleMutation} = modulesAPI;
+export const {useGetModulesQuery,useGetByTeacherIdModulesQuery, useAddModuleMutation, useUpdateModuleMutation, useDeleteModuleMutation} = modulesAPI;

@@ -3,7 +3,7 @@ import {useAddFolderMutation} from "../../redux/folders/folderOperations.js";
 import styles from "./newFolderForm.module.css";
 import {useParams} from "react-router-dom";
 
-export const NewFolderForm = ({togglemodal}) => {
+export const NewFolderForm = ({togglemodal, title}) => {
     const {id} = useParams();
     const [folder, setFolder] = useState("");
     const [addFolder] = useAddFolderMutation();
@@ -20,6 +20,7 @@ export const NewFolderForm = ({togglemodal}) => {
         togglemodal();
     }
     return (<form className={styles.form} onSubmit={handleSubmit}>
+        <p>{title}</p>
         <input className={styles.input} type = "text" placeholder="Enter a folder name..." value={folder} onChange={handleInputChange} />
         <button className={styles.button} type = "submit">Save</button>
     </form>)

@@ -18,7 +18,7 @@ export const Modal = ({children, toggleModal}) => {
             toggleModal();
         }
     }
-    return<div className={styles.backdrop} onClick={closedByClick}>
+    return<div className={styles.backdrop}>
         <div className={styles.modal}>
             {children}
             <button type = "button" onClick={toggleModal}>x</button>

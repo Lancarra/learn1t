@@ -6,6 +6,7 @@ import {NewDefinitionForm} from "../../components/NewDefinitionForm/NewDefinitio
 import styles from "./dictionaryPage.module.css";
 import {DictionaryCardItem} from "../../components/DictionaryCardItem/DictionaryCardItem.jsx";
 import {CreateNewQuizForm} from "../../components/CreateNewQuizForm/CreateNewQuizForm.jsx";
+import {CreateTestForm} from "../../components/CreateTestForm/CreateTestForm.jsx"
 
 export const DictionaryPage = () => {
     const { id } = useParams();
@@ -16,6 +17,8 @@ export const DictionaryPage = () => {
     const [isShowModal, setIsShowModal] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isShowDefinitionModal, setIsShowDefinitionModal] = useState(false);
+    const [isShowTestModal, setIsShowTestModal] = useState(false);
+    const toggleTestModal = () => setIsShowTestModal(!isShowTestModal);
     const toggleDefinitionModal = () => setIsShowDefinitionModal(!isShowDefinitionModal);
     const toggleModal = () => setIsShowModal(!isShowModal);
     const handleInputChange = (e) => setSearch(e.target.value);
@@ -42,27 +45,24 @@ export const DictionaryPage = () => {
 
     return (
         <>
-            <h1 className={styles.dictTitle}>Word in Dictionary ...</h1>
+            <div className={styles.dashboardPage}>
+                <div className={styles.dashboardContainer}>
+                    <h1 className={styles.dictTitle}>Words in Dictionary</h1>
 
             <div className={styles.dictToolbar}>
-                <button
-                    type="button"
-                    onClick={toggleModal}
-                    className={`${styles.dictPill} ${styles.dictPillPrimary}`}
-                >
+                <button type="button" onClick={toggleModal}
+                    className={`${styles.dictPill} ${styles.dictPillPrimary}`}>
                     Create new definition
                 </button>
                 <button type="button" className={styles.dictPill} onClick={toggleDefinitionModal}>
-                    Learn definitions
+                    Learn Definitions
                     </button>
+                <button type="button" className={styles.dictPill} onClick={toggleTestModal}>
+                    Create Test
+                </button>
                 <button type="button" onClick={toggleShow} className={styles.dictPill}>Find definition</button>
                 {isShow && (
-                    <input
-                        value ={search} onChange={handleInputChange}
-                        className={styles.searchInput}
-                        type="text"
-                        placeholder="Enter a definition name..."
-                    />
+                    <input value ={search} onChange={handleInputChange} className={styles.searchInput} type="text" placeholder="Enter a definition name..."/>
                 )}
             </div>
             <div className={styles.dictPreview}>
@@ -77,11 +77,11 @@ export const DictionaryPage = () => {
             >
                 <div className={`${styles.flipInner} ${isFlipped ? styles.flipped : ""}`}>
                     <div className={styles.flipFront}>
-                        <img src={currentItem?.imageURL} alt="" />
+                        {currentItem?.imageURL  && <img src={currentItem?.imageURL} alt=""/>}
                         <p className={styles.dictPreviewWord}>{currentItem?.word}</p>
                     </div>
                     <div className={styles.flipBack}>
-                        <img src={currentItem?.imageURL} alt="" />
+                        {currentItem?.imageURL && <img src={currentItem?.imageURL} alt=""/>}
                         <p className={styles.dictPreviewMeaning}>{currentItem?.meaning}</p>
                     </div>
                 </div>
@@ -94,6 +94,8 @@ export const DictionaryPage = () => {
                     <DictionaryCardItem id={id} word={word} meaning={meaning} blobId={blobId} imageURL={imageURL} />
                 ))}
             </ul>
+            </div>
+        </div>
 
             {isShowModal && (
                 <Modal toggleModal={toggleModal}>
@@ -102,6 +104,9 @@ export const DictionaryPage = () => {
             )}
             {isShowDefinitionModal && <Modal toggleModal={toggleDefinitionModal}>
                 <CreateNewQuizForm togglemodal={toggleDefinitionModal} dictionaryId={id}/>
+            </Modal>}
+            {isShowTestModal && <Modal toggleModal={toggleTestModal}>
+                <CreateTestForm togglemodal={toggleTestModal} dictionaryId={id}/>
             </Modal>}
         </>
     );

@@ -9,8 +9,7 @@
 
     /* служебные для подсветок */
     --ok: color-mix(in srgb, var(--primary) 26%, #22c55e);
-    --bad: color-mix(in srgb, #ef4444 22%, var(--card-bg));
-}
+    --bad: color-mix(in srgb, #ff2b2b 42%, var(--card-bg)); }
 [data-theme="dark"]{
     --bg-color:#13100b; --text-color:#f3e9d2; --card-bg:#1e1a12;
     --primary:#d4a017; --primary-hover:#b8860b;
@@ -38,7 +37,7 @@
     font-size: clamp(24px, 3.2vw, 36px);
     font-weight: 800;
     margin: 8px 0 6px;
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
 }
 .rule{
     position: relative;

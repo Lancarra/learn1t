@@ -3,7 +3,7 @@ import styles from "./newDictionaryForm.module.css";
 import {useParams} from "react-router-dom";
 import {useAddDictionaryMutation} from "../../redux/dictionary/dictionaryOperations.js";
 
-export const NewDictionaryForm = ({togglemodal}) => {
+export const NewDictionaryForm = ({togglemodal, title}) => {
     const {id} = useParams();
     const [dictionary, setDictionary] = useState("");
     const [addDictionary] = useAddDictionaryMutation();
@@ -20,6 +20,7 @@ export const NewDictionaryForm = ({togglemodal}) => {
         togglemodal();
     }
     return (<form className={styles.form} onSubmit={handleSubmit}>
+        <p>{title}</p>
         <input className={styles.input} type = "text" placeholder="Enter a dictionary name..." value={dictionary} onChange={handleInputChange} />
         <button className={styles.button} type = "submit">Save</button>
     </form>)

@@ -23,6 +23,13 @@ export const quizAPI = createApi({
             }),
             providesTags:['quiz'],
         }),
+        getInfoQuiz: builder.query({
+            query: (cardId) => ({
+                method: "GET",
+                url:`/quiz/get-info/${cardId}`
+            }),
+            providesTags:['quiz'],
+        }),
         addQuiz: builder.mutation({
             query: (value) => ({
                 method: "POST",
@@ -66,4 +73,4 @@ export const quizAPI = createApi({
 
     })
 });
-export const {useGetQuizQuery, useAddQuizMutation, useUpdateQuizMutation, useCheckQuizMutation, useAnswerQuizMutation, useCheckAnswerMutation} = quizAPI;
+export const {useGetQuizQuery, useGetInfoQuizQuery, useAddQuizMutation,  useUpdateQuizMutation, useCheckQuizMutation, useAnswerQuizMutation, useCheckAnswerMutation} = quizAPI;

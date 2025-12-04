@@ -1,13 +1,19 @@
-import {Link} from "react-router-dom";
-import "../../styles/vars.css";
+import { Link } from "react-router-dom";
 import styles from "./navigation.module.css";
+import {useLocation} from "react-router-dom";
 
 export const Navigation = () => {
-    return (<nav>
-        <ul className={styles.ulList}>
-            <li><Link to="/">Home /</Link></li>
-               {/* <li><Link to="/dashboard">Dashboard /</Link></li>
-                <li><Link to="/profile">Profile /</Link></li>*/}
-        </ul>
-    </nav>)
-}
+    const location = useLocation();
+    console.log(location);
+    return (
+        <nav className={styles.crumbBar}>
+            <ul className={styles.ulList}>
+                <li className={styles.ulItem}>
+{/*
+                    <Link to="/" className={styles.ulLink}>Home</Link>
+*/}
+                </li>
+            </ul>
+        </nav>
+    );
+};

@@ -1,0 +1,218 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #3b2a00;
+    --card-bg: #fffaf0;
+    --input-border: #e0c68c;
+    --primary: #d4a017;
+    --primary-hover: #b8860b;
+    --muted-text: #8a7a50;
+}
+
+.studentsPage {
+    min-height: 100vh;
+    padding: 24px 32px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Header */
+
+.pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted-text);
+}
+
+.addButton {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.addButton:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Card */
+
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--input-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.studentsCard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.cardSubtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted-text);
+}
+
+/* Search */
+
+.searchWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-color);
+    border-radius: 999px;
+    border: 1px solid var(--input-border);
+    padding: 8px 12px;
+    min-width: 240px;
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+    flex: 1;
+    background: transparent;
+    font-size: 14px;
+}
+
+.searchIcon {
+    font-size: 18px;
+}
+
+/* List */
+
+.list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.listItem {
+    background: var(--bg-color);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.studentInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatarWrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--input-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatarFallback {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.studentName {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.studentEmail {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted-text);
+}
+
+/* Buttons */
+
+.assignButton {
+    border: 1px solid var(--input-border);
+    background: var(--primary);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+}
+
+.assignButton:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .studentsPage {
+        padding: 16px 20px;
+    }
+
+    .listItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .assignButton {
+        align-self: flex-end;
+    }
+
+    .searchWrapper {
+        width: 100%;
+    }
+}

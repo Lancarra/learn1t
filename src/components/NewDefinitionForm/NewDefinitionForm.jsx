@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useAddDefinitionMutation} from "../../redux/definitionList/definitionaList.js";
 
-export const NewDefinitionForm = ({togglemodal, id}) => {
+export const NewDefinitionForm = ({togglemodal, id, title}) => {
     const [word, setWord] = useState("");
     const [image, setImage] = useState("");
     const [meaning, setMeaning] = useState("");
@@ -30,7 +30,7 @@ export const NewDefinitionForm = ({togglemodal, id}) => {
     }
 
     return <form onSubmit={handleSubmit}>
-        <p>Create Definition</p>
+        <p>{titile}</p>
         <input type="text" name="image" value={image} onChange={handleChange} />
         <input type="text" name="word" value={word} onChange={handleChange} />
         <input type="text" name="meaning" value={meaning} onChange={handleChange} />

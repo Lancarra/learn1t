@@ -1,45 +1,37 @@
-import icon1 from "../assets/icon1.jpg";
-import icon2 from "../assets/icon2.jpg";
-import icon3 from "../assets/icon3.jpg";
-import icon4 from "../assets/icon4.jpg";
-import icon5 from "../assets/icon5.jpg";
-import icon6 from "../assets/icon6.jpg";
-import icon8 from "../assets/icon8.webp";
-import icon9 from "../assets/icon9.jpg";
+import { useMemo } from "react";
+import {useGetStaticIconsQuery} from "../redux/profile/staticIcons/staticIconsList.js";
 
-const icons = [{
-    id:1,
-    src: icon1
-},
-    {
-     id:2,
-     src: icon2
-    },
-    {
-        id:3,
-        src: icon3
-    },
-    {
-        id:4,
-        src: icon4
-    },
-    {
-        id:5,
-        src: icon5
-    },
-    {
-        id:6,
-        src: icon6
-    },
-    {
-        id:8,
-        src: icon8
-    },
-    {
-        id:9,
-        src: icon9
-    }]
+const asDataUrl = (base64, mime = "image/png") =>
+    `data:${mime};base64,${base64}`;
 
 export const useIcons = () => {
-    return icons;
-}
+    const { data, isSuccess } = useGetStaticIconsQuery();
+
+    return useMemo(() => {
+        if (!isSuccess || !Array.isArray(data)) return [];
+
+        return data.map((item, i) => {
+            const id = item.id ?? item.name ?? item.url ?? i;
+
+            if (item.content) {
+                const mime =
+                    item.contentType ||
+                    (item.url && item.url.endsWith(".svg") ? "image/svg+xml" : "image/png");
+
+                return { id, src: asDataUrl(item.content, mime) };
+            }
+
+            if (item.url) {
+                return { id, src: item.url };
+            }
+
+            if (item.name) {
+                const STATIC_BASE =
+                    "http://127.0.0.1:10000/devstoreaccount1/static-images";
+                return { id, src: `${STATIC_BASE}/${encodeURIComponent(item.name)}` };
+            }
+
+            return { id, src: "" };
+        });
+    }, [data, isSuccess]);
+};

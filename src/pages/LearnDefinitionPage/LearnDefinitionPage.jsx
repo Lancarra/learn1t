@@ -38,14 +38,13 @@ export const LearnDefinitionPage = () => {
             }
             return prev + 1;
         })
-        answers.push({ testUnitId: randomCard?.testUnitId, answer: value });
+        answers.push({ testUnitId: randomCard?.testUnitId, answer: value, img: definition.imageURL, word: definition.word, meaning: definition.meaning });
         localStorage.setItem("answer", JSON.stringify(answers));
         if (answers.length === data?.testUnits.length) {
             answers.length = 0
             setMaxProgress(0)
         }
     }
-
     return (
         <>
         <div className={styles.lp}>
@@ -80,7 +79,7 @@ export const LearnDefinitionPage = () => {
                 </ul>
             </div>
         </div>
-            {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} dictionaryId={cardId} /></Modal>}
+            {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} thirdbutton = "Skip the second level quiz" dictionaryId={cardId} /></Modal>}
         </>
     );
 };
