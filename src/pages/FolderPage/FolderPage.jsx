@@ -6,10 +6,12 @@ import { useState } from "react";
 import { ItemCard } from "../../components/ItemCard/ItemCard.jsx";
 import {NewDictionaryForm} from "../../components/NewDictionaryForm/NewDictionaryForm.jsx";
 import {CiSearch} from "react-icons/ci";
+import {useAuth} from "../../hooks/useAuth.js";
 
 export const FolderPage = () => {
     const { id } = useParams();
     const { data } = useGetDictionariesQuery(id);
+    const { user:{roleName, name} } = useAuth();
 
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isShow, setIsShow] = useState(false);
@@ -27,14 +29,15 @@ export const FolderPage = () => {
     return (
         <>
             <div className={styles["dashboard-page"]}>
-                <div className="dashboard-container">
+                <div className={styles.container}>
                     <h1 className={styles["dashboard-greeting"]}>Here are your dictionaries.</h1>
                     <p className={styles["header-subtitle"]}>
                         Create and manage your vocabulary dictionaries for this folder.
                     </p>
                     <div className={styles["action-bar"]}>
                         <div className={styles["action-right"]}>
-                            <button type="button" onClick={toggleModal}>Create new dictionary</button>
+                            {roleName !== "Student" && (
+                            <button type="button" onClick={toggleModal}>Create new dictionary</button>)}
                             <div className={styles["search-wrapper"]}>
                                 <CiSearch className={styles.searchIcon} />
                                 <input value={keyWord} onChange={handleInputChange} className={styles.searchInput} type="text" placeholder="Search a dictionary name..."/>
@@ -48,7 +51,7 @@ export const FolderPage = () => {
                     </ul>
 
                     {isOpenModal && (
-                        <Modal toggleModal={toggleModal} title="Create dictionary">
+                        <Modal toggleModal={toggleModal} >
                             <NewDictionaryForm togglemodal={toggleModal} title="Create dictionary" />
                         </Modal>
                     )}

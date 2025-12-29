@@ -39,7 +39,7 @@ export const NewModuleForm = ({togglemodal, title}) => {
         togglemodal();
     }
     return (<form className={styles.form} onSubmit={handleSubmit}>
-        <p>{title}</p>
+        <h2 className={styles.title}>{title}</h2>
         <input className={styles.input} type = "text" placeholder="Enter a module name..." name = "module" value={module} onChange={handleInputChange} />
         <input className={styles.input} type = "text" placeholder="Enter a description..." name = "description" value={description} onChange={handleInputChange} />
         <input className={styles.input} type = "text" placeholder="Enter a learn level..." name = "level" value={level} onChange={handleInputChange} />

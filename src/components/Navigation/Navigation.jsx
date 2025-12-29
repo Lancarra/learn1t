@@ -4,7 +4,6 @@ import {useLocation} from "react-router-dom";
 
 export const Navigation = () => {
     const location = useLocation();
-    console.log(location);
     return (
         <nav className={styles.crumbBar}>
             <ul className={styles.ulList}>

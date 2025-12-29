@@ -9,13 +9,15 @@ export const Header = () => {
         localStorage.removeItem("persist:auth");
         window.location.reload();
     };
-    console.log("new", user.roleName);
     return (
         <div className={styles.headerWrap}>
             <div className={styles.topbarContainer}>
                 <header className={styles.topbar}>
                     <div className={styles.topbarLeft}>
-                        <Link to="/dashboard" className={styles.brand}>LearnIT</Link>
+                        {user.roleName === "Admin" && <Link to="/admin/panel" className={styles.brand}>LearnIT</Link>}
+                        {user.roleName === "Admin;" && <Link to="/admin/panel" className={styles.brand}>LearnIT</Link>}
+                        {user.roleName === "Student" && <Link to="/dashboard" className={styles.brand}>LearnIT</Link>}
+                        {user.roleName === "Student;" && <Link to="/dashboard" className={styles.brand}>LearnIT</Link>}
                     </div>
 
                     <div className={styles.topbarRight}>
@@ -30,8 +32,8 @@ export const Header = () => {
                                 </button>
                             </>
                         )}
-                        {user.roleName === "Admin"  && <NavLink to = "/admin/panel">Admin Panel</NavLink>}
-                        {user.roleName === "Admin;"  && <NavLink to = "/admin/panel">Admin Panel</NavLink>}
+{/*                        {user.roleName === "Admin"  && <NavLink to = "/admin/panel">Admin Panel</NavLink>}
+                        {user.roleName === "Admin;"  && <NavLink to = "/admin/panel">Admin Panel</NavLink>}*/}
                     </div>
                 </header>
             </div>

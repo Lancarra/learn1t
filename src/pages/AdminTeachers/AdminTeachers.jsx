@@ -4,6 +4,7 @@ import {useGetTeachersQuery} from "../../redux/admin/AdminList.js";
 import {useGetByTeacherIdModulesQuery} from "../../redux/modules/moduleOperations.js";
 import {NavLink} from "react-router-dom";
 import styles from "./adminTeachers.module.css"
+import {PiChalkboardTeacher} from "react-icons/pi";
 
 export const AdminTeachers = () => {
     const {data:teachers} = useGetTeachersQuery();
@@ -15,18 +16,16 @@ export const AdminTeachers = () => {
     const teachersArray = teachers?.teachers?.filter((teacher) =>
         teacher.username.toLowerCase().includes(keyWord.toLowerCase())
     ) || [];
-    console.log(teachers)
+
+    console.log(teachersArray);
     return (
         <section className={styles.teachersPage}>
+            <div className={styles.container}>
             <div className={styles.pageHeader}>
                 <div>
                     <h1 className={styles.title}>Teachers</h1>
                     <p className={styles.subtitle}>Manage all teachers in the system</p>
                 </div>
-
-                <button type="button" className={styles.addButton}>
-                    + Add Teacher
-                </button>
             </div>
 
             <div className={`${styles.card} ${styles.teachersCard}`}>
@@ -59,14 +58,14 @@ export const AdminTeachers = () => {
                                 <div className={styles.avatarWrapper}>
                                     {teacher.blobId ? (
                                         <img
-                                            src={teacher.blobId}
+                                            src={`http://127.0.0.1:10000/devstoreaccount1/user-images/${teacher.blobId}`}
                                             alt={teacher.username}
                                             className={styles.avatarImg}
                                         />
                                     ) : (
                                         <span className={styles.avatarFallback}>
-                      {teacher.username?.[0] || "?"}
-                    </span>
+                                            <PiChalkboardTeacher />
+                                        </span>
                                     )}
                                 </div>
 
@@ -88,6 +87,7 @@ export const AdminTeachers = () => {
                         </li>
                     ))}
                 </ul>
+            </div>
             </div>
         </section>
     );

@@ -17,14 +17,19 @@
 }
 
 .backdrop{
-    position: fixed; inset: 0; z-index: 100;
-    background: radial-gradient(1200px 1200px at 50% 50%, rgba(0,0,0,.52), rgba(0,0,0,.65));
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.32);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
 }
 
 .modal{
-    position: absolute; top:50%; left:50%;
-    transform: translate(-50%, -50%);
-    width: min(560px, 92vw);
+    position: relative;
     background: var(--card-bg);
     color: var(--text-color);
     border: 1px solid var(--input-border);
@@ -32,35 +37,36 @@
     box-shadow: var(--shadow);
     padding: 24px 24px 22px;
 
+    max-height: 86vh;
+    overflow: auto;
 }
 
-.modal > button:last-child{
-    position: absolute; top: 10px; right: 12px;
-    width: 30px; height: 30px; display: grid; place-items: center;
-    border-radius: 999px; border: 1px solid transparent; background: transparent;
-    color: var(--icon-color); font-weight: 700; line-height: 1; cursor: pointer;
-    transition: background .12s ease, transform .12s ease, border-color .12s ease;
+.sm { width: min(560px, 92vw); }
+.md { width: min(720px, 92vw); }
+.lg { width: min(1000px, 92vw); }
+
+.closeBtn{
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--icon-color);
+    font-weight: 700;
+    cursor: pointer;
 }
-.modal > button:last-child:hover{
+
+.closeBtn:hover{
     background: rgba(255,255,255,.45);
     border-color: rgba(0,0,0,.06);
     transform: translateY(-1px);
 }
 
 @media (max-width: 640px){
-    .modalBody form button[type="submit"]{ width: 100%; max-width: 460px; }
-}
-
-
-
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-@keyframes popIn{
-    0%{ opacity:0; transform: translate(-50%, -52%) scale(.96); }
-    100%{ opacity:1; transform: translate(-50%, -50%) scale(1); }
-}
-
-/* адаптив */
-@media (max-width: 640px){
-    .modal{ width:min(600px,94vw); padding:20px 18px 16px; border-radius:14px; }
-    .modalBody > *{ max-width:100%; }
+    .modal{ padding:20px 18px 16px; border-radius:14px; }
 }

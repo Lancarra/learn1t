@@ -1,0 +1,76 @@
+.modal {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #3a2a00;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #6b5a2e;
+    margin-bottom: 28px;
+}
+
+.mainAction {
+    margin-bottom: 24px;
+}
+
+.primaryButton {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #d9a100;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.primaryButton:hover {
+    background-color: #c18f00;
+}
+
+.secondaryActions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.secondaryButton {
+    padding: 10px 18px;
+    font-size: 14px;
+    background: #f2c94c;
+    color: #3a2a00;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.secondaryButton:hover {
+    background: #e0b843;
+}
+
+.ghostButton {
+    padding: 10px 18px;
+    font-size: 14px;
+    background: transparent;
+    border: 1px solid #d9a100;
+    color: #d9a100;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.ghostButton:hover {
+    background: rgba(217, 161, 0, 0.1);
+}

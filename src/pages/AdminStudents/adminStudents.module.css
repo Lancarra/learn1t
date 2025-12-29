@@ -7,16 +7,21 @@
     --primary-hover: #b8860b;
     --muted-text: #8a7a50;
 }
+.container {
+    width: 100%;
+    max-width: 1200px;
+}
 
 .studentsPage {
     min-height: 100vh;
-    padding: 24px 32px;
+    padding: 32px 24px;
     background: var(--bg-color);
     color: var(--text-color);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-/* Header */
 
 .pageHeader {
     display: flex;
@@ -162,10 +167,15 @@
 }
 
 .avatarFallback {
-    font-size: 18px;
-    font-weight: 600;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--primary);
+    font-size: 22px;
 }
+
 
 .studentName {
     margin: 0;
@@ -178,8 +188,6 @@
     font-size: 14px;
     color: var(--muted-text);
 }
-
-/* Buttons */
 
 .assignButton {
     border: 1px solid var(--input-border);
@@ -196,7 +204,6 @@
     border-color: var(--primary);
 }
 
-/* Responsive */
 
 @media (max-width: 768px) {
     .studentsPage {

@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { Provider } from 'react-redux'
 import {PersistGate} from "redux-persist/integration/react";
 import {store, persistor} from './redux/store.js'
+import {ToastContainer} from 'react-toastify'
 
 createRoot(document.getElementById('root')).render(
 /*
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
           <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <App />
+                <ToastContainer autoClose={3000}/>
             </PersistGate>
           </Provider>
       </BrowserRouter>

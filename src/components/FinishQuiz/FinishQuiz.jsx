@@ -1,16 +1,15 @@
+/*
 import {useAddQuizMutation} from "../../redux/quiz/quizOperations.js";
+*/
 import {useNavigate} from "react-router-dom";
+import styles from "./finishQuiz.module.css"
 
-
-export const FinishQuiz = ({togglemodal, thirdbutton}) => {
-    const dictionaryId = JSON.parse(localStorage.getItem("id"))
-    const [addQuizModal] = useAddQuizMutation();
+export const FinishQuiz = ({togglemodal, thirdbutton, variant}) => {
+/*    const dictionaryId = JSON.parse(localStorage.getItem("id"))
+    const [addQuizModal] = useAddQuizMutation();*/
     const navigate = useNavigate();
 
     const handleAddQuiz = async() => {
-/*
-        const data = await addQuizModal({testUnits:[{dictionaryId}]})
-*/
         const cardId = localStorage.getItem("cardId");
         localStorage.setItem("answer", JSON.stringify([]));
         navigate(`/quiz/${cardId}`);
@@ -29,12 +28,35 @@ export const FinishQuiz = ({togglemodal, thirdbutton}) => {
     }
 
 
-    return (<>
-            <h1>Congratulation!!!</h1>
-            <button type = "button" onClick={handleAddQuiz}>Repeat the quiz again</button>
-            <button type = "button" onClick={handleSecondAddQuiz}>Continue learn quiz</button>
-            <button type = "button" onClick={handleShowResult}>{thirdbutton}</button>
-        </>
-    )
-}
+    return (
+        <div className={styles.modal}>
+            {!variant && <h1 className={styles.title}>Congratulations 🎉</h1>}
+            {variant && <h1 className={styles.title}>Well Done 🎉</h1>}
+
+            {!variant && <p className={styles.subtitle}>
+                You’ve finished the first part of the quiz
+            </p>}
+            {variant && <p className={styles.subtitle}>
+                You’ve finished the second part of the quiz
+            </p>}
+
+            {!variant && <div className={styles.mainAction}>
+                <button type="button" className={styles.primaryButton} onClick={handleSecondAddQuiz}>
+                    Continue learning — writing practice
+                </button>
+            </div>}
+
+            <div className={styles.secondaryActions}>
+                <button  type = "button" className={styles.secondaryButton} onClick={handleAddQuiz}>
+                    Repeat the quiz
+                </button>
+
+                <button type = "button" className={styles.ghostButton} onClick={handleShowResult}>
+                    {thirdbutton}
+                </button>
+            </div>
+        </div>
+    );
+};
+
 

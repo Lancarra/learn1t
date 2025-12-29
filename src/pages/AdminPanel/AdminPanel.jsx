@@ -2,6 +2,8 @@ import { PiStudentLight } from "react-icons/pi";
 import { PiChalkboardTeacherLight } from "react-icons/pi";
 import { IoBookOutline } from "react-icons/io5";
 import { PiChartLineUpLight } from "react-icons/pi";
+import { GoFileSubmodule } from "react-icons/go";
+
 import styles from "./adminPanel.module.css"
 import {useGetStudentsQuery, useGetTeachersQuery} from "../../redux/admin/AdminList.js";
 import {useGetModulesQuery} from "../../redux/modules/moduleOperations.js";
@@ -28,7 +30,8 @@ export const AdminPanel = () => {
     const {data:teachers} = useGetTeachersQuery();
     const {data:students} = useGetStudentsQuery();
     const {data:modules} = useGetModulesQuery();
-console.log(modules);
+
+    console.log(modules)
     return (
         <div className={styles.adminPanel}>
             <div className={styles.header}>
@@ -70,7 +73,7 @@ console.log(modules);
 
                     <div className={`${styles.card} ${styles.statCard}`}>
                         <div className={styles.statHeader}>
-                            <h3 className={styles.statTitle}>Total Quiz</h3>
+                            <h3 className={styles.statTitle}>Total Test</h3>
                             <PiChartLineUpLight className={styles.statIcon} />
                         </div>
                         <div className={styles.statContent}>
@@ -94,16 +97,37 @@ console.log(modules);
                         </div>
                     ))}
                 </div>
-                <ul className={styles.modulesList}>
-                    {modules?.modules?.map(({ id, author, name }) => (
-                        <li key={id} className={styles.moduleItem}>
-                            <NavLink to={`/dashboard/module/${id}`} className={styles.moduleCard}>
-                                <p className={styles.moduleName}>{name}</p>
-                                <p className={styles.moduleAuthor}>by {author}</p>
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
+                <div className={styles.modulesSection}>
+                    <div className={styles.modulesHeading}>
+                        <h2 className={styles.modulesTitle}>All Modules</h2>
+                        <p className={styles.modulesSubtitle}>
+                            Browse all modules
+                        </p>
+                    </div>
+
+                    <ul className={styles.modulesList}>
+                        {modules?.modules?.map(({ id, author, name, description, learnLevel }) => (
+                            <li key={id} className={styles.moduleItem}>
+                                <NavLink to={`/dashboard/module/${id}`} className={styles.moduleCard}>
+                                    <div className={styles.moduleIconBubble}>
+                                        <GoFileSubmodule className={styles.moduleIcon} />
+                                    </div>
+
+                                    <p className={styles.moduleName}>{name}</p>
+
+                                    <p className={styles.moduleDescription}>
+                                        {description || "No description"}
+                                    </p>
+
+                                    <div className={styles.moduleMeta}>
+                                        <span className={styles.moduleBadge}>{learnLevel || "Level"}</span>
+                                        <span className={styles.moduleAuthor}>by {author}</span>
+                                    </div>
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     );

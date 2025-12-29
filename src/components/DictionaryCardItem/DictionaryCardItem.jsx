@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useDeleteDefinitionMutation} from "../../redux/definitionList/definitionaList.js";
 import {Modal} from "../Modal/Modal.jsx";
 import {ChangeDefinitionForm} from "../ChangeDefinitionForm/ChangeDefinitionForm.jsx";
+import SpeakWeb from "../SpeakWeb/SpeakWeb.jsx";
 
 export const DictionaryCardItem = ({id, word, meaning, imageURL, blobId}) => {
     const [isShowButton, setIsShowButton] = useState(false);
@@ -44,7 +45,7 @@ export const DictionaryCardItem = ({id, word, meaning, imageURL, blobId}) => {
 
             {isShowModal && (
                 <Modal toggleModal={toggleShowModal}>
-                    <ChangeDefinitionForm togglemodal={toggleShowModal} id={id} name={word} img={imageURL} mean={meaning}/>
+                    <ChangeDefinitionForm togglemodal={toggleShowModal} wordId={id} name={word} img={imageURL} mean={meaning} blobId={blobId}/>
                 </Modal>
             )}
         </>

@@ -1,0 +1,27 @@
+.answerWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.answerInput {
+    width: 100%;
+    max-width: 520px;
+    height: 40px;
+    padding: 8px 12px;
+
+    border-radius: 10px;
+    border: 1px solid #e7d6b1;
+    background: #fffdf7;
+
+    font-size: 15px;
+    color: #222;
+
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.answerInput:focus {
+    outline: none;
+    border-color: #d6a10d;
+    box-shadow: 0 0 0 4px rgba(214, 161, 13, 0.18);
+}

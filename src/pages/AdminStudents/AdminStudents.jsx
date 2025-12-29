@@ -1,6 +1,7 @@
 import {useGetStudentsQuery} from "../../redux/admin/AdminList.js";
 import {useState} from "react";
 import { CiSearch } from "react-icons/ci";
+import { PiStudent } from "react-icons/pi";
 import styles from "./adminStudents.module.css"
 import {Modal} from "../../components/Modal/Modal.jsx";
 import {AssignTeacher} from "../../components/AssignTeacher/AssignTeacher.jsx";
@@ -18,16 +19,14 @@ export const AdminStudents = () => {
     const studentsArray = students?.students?.filter((student)=>student.username.toLowerCase().includes(keyWord.toLowerCase())) || [];
     return (
         <section className={styles.studentsPage}>
-            {/* Header section */}
+            <div className={styles.container}>
             <div className={styles.pageHeader}>
                 <div>
                     <h1 className={styles.title}>Students</h1>
                     <p className={styles.subtitle}>Manage all students in the system</p>
                 </div>
 
-                <button type="button" className={styles.addButton}>
-                    + Add Student
-                </button>
+
             </div>
 
             {/* Main card */}
@@ -62,14 +61,14 @@ export const AdminStudents = () => {
                                 <div className={styles.avatarWrapper}>
                                     {student.blobId ? (
                                         <img
-                                            src={student.blobId}
+                                            src={`http://127.0.0.1:10000/devstoreaccount1/user-images/${student.blobId}`}
                                             alt={student.username}
                                             className={styles.avatarImg}
                                         />
                                     ) : (
                                         <span className={styles.avatarFallback}>
-                      {student.username?.[0] || "?"}
-                    </span>
+                                            <PiStudent />
+                                        </span>
                                     )}
                                 </div>
 
@@ -88,6 +87,7 @@ export const AdminStudents = () => {
                         </li>
                     ))}
                 </ul>
+            </div>
             </div>
         </section>
     );

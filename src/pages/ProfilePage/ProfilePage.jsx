@@ -4,6 +4,7 @@ import {useIcons} from "../../hooks/useIcons.js";
 import {useState} from "react";
 import styles from "./ProfilePage.module.css";
 import {useUpdateProfileMutation, useUpdateProfileBlobMutation} from "../../redux/profile/profileOperations.js";
+import {toast} from "react-toastify";
 
 export const ProfilePage = () => {
     const [updateProfile] = useUpdateProfileMutation();
@@ -42,6 +43,7 @@ export const ProfilePage = () => {
             username: name,
             blobId: user.blobId,
         })
+        toast.success("Profile updated successfully.");
     }
 
     return<>
@@ -97,7 +99,7 @@ export const ProfilePage = () => {
                                 }}
                             />
                         </li>
-                    ))} TODO
+                    ))}
                     <li className={styles.profileIconItem}>
                         <label className={styles.addIcon}>
                             <input type = "file" accept="image/*, .png, .jpg, .jpeg, .webp" onChange={(e) => {
@@ -121,7 +123,7 @@ export const ProfilePage = () => {
                 </ul>
             </div>
 
-            <form className={styles.profileForm} onSubmit={handleSubmit}>
+            <form className={styles.profileForm} onSubmit={handleSubmit} >
                 <div className={styles.profileField}>
                     <label>User Name</label>
                     <input

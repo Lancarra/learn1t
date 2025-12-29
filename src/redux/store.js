@@ -19,6 +19,7 @@ import {quizAPI} from "./quiz/quizOperations.js";
 import {staticiconsAPI} from "./profile/staticIcons/staticIconsList.js";
 import {profilesAPI} from "./profile/profileOperations.js";
 import {adminAPI} from "./admin/AdminList.js";
+import {teacherAPI} from "./teacher/TeacherList.js";
 
 const middleware = getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -34,6 +35,7 @@ const middleware = getDefaultMiddleware => [
     staticiconsAPI.middleware,
     profilesAPI.middleware,
     adminAPI.middleware,
+    teacherAPI.middleware,
 ]
 const authPersistConfig = {
     key: 'auth',
@@ -51,6 +53,7 @@ export const store = configureStore({
         [staticiconsAPI.reducerPath]: staticiconsAPI.reducer,
         [profilesAPI.reducerPath]: profilesAPI.reducer,
         [adminAPI.reducerPath]: adminAPI.reducer,
+        [teacherAPI.reducerPath]: teacherAPI.reducer,
 
     },
     middleware,

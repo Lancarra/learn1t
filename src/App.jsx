@@ -22,6 +22,8 @@ import {AdminTeachers} from "./pages/AdminTeachers/AdminTeachers.jsx";
 import {TeacherPanel} from "./pages/TeacherPanel/TeacherPanel.jsx";
 import {ContinueLearnDefinitionPage} from "./pages/ContinueLearnDefinitionPage/ContinueLearnDefinitionPage.jsx";
 import {InfoTestPage} from "./pages/InfoTestPage/InfoTestPage.jsx";
+import {TestPage} from "./pages/TestPage/TestPage.jsx";
+import {StudentsResult} from "./pages/StudentsResult/StudentsResult.jsx";
 
 function App() {
 
@@ -44,7 +46,9 @@ function App() {
         <Route path="/folder/:id" element={<PrivateRoute redirectTo="/" component={<FolderPage/>}/>}/>
         <Route path="/dictionary/:id" element={<PrivateRoute redirectTo="/" component={<DictionaryPage/>}/>}/>
         <Route path="/quiz/:cardId" element={<PrivateRoute redirectTo="/" component={<LearnDefinitionPage/>}/>}/>
+        <Route path="/test/:cardId" element={<PrivateRoute redirectTo="/" component={<TestPage/>}/>}/>
         <Route path="/test/info/:cardId" element={<PrivateRoute redirectTo="/" component={<InfoTestPage/>}/>}/>
+        <Route path="/test/info/answers/:cardId" element={<PrivateRoute redirectTo="/" component={<StudentsResult/>}/>}/>
         <Route path="/secondquiz/:cardId" element={<PrivateRoute redirectTo="/" component={<ContinueLearnDefinitionPage/>}/>}/>
         <Route path="/quiz/result/:cardId" element={<PrivateRoute redirectTo="/" component={<ResultPage/>}/>}/>
         <Route path="/profile" element={<PrivateRoute redirectTo="/" component={<ProfilePage/>}/>}/>

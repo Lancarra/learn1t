@@ -1,0 +1,207 @@
+:root{
+    --bg-color:#ffffff; --text-color:#3b2a00; --card-bg:#fffaf0;
+    --primary:#d4a017; --primary-hover:#b8860b;
+    --input-bg:#fffdf7; --input-border:#e0c68c;
+    --icon-color:#b8860b; --muted:#6b4e16;
+    --shadow:0 18px 50px rgba(0,0,0,.12);
+    --shadow-hover:0 26px 70px rgba(0,0,0,.18);
+
+    --radius: 14px;
+    --radius-sm: 12px;
+}
+
+/* ===== WRAPPER ВНУТРИ MODAL ===== */
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    /* чтобы не появлялся горизонтальный скролл */
+    min-width: 0;
+}
+
+/* ===== HEADER ===== */
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(224,198,140,.75);
+}
+
+.headText{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.title{
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-color);
+    letter-spacing: 0.2px;
+}
+
+.subtitle{
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    opacity: .9;
+}
+
+/* Крестик ВНУТРИ контента (если нужно).
+   Если крестик уже есть в твоём Modal — просто не используй этот класс. */
+.close{
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid rgba(224,198,140,.9);
+    background: transparent;
+    color: var(--icon-color);
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform .08s ease, background .15s ease, border-color .15s ease;
+}
+
+.close:hover{
+    background: rgba(255,255,255,.55);
+    border-color: rgba(212,160,23,.55);
+    transform: translateY(-1px);
+}
+
+/* ===== FORM ===== */
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* ===== SELECT (красивый) ===== */
+.selectWrap{
+    position: relative;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.selectWrap:focus-within{
+    border-color: rgba(212,160,23,.7);
+    box-shadow: 0 0 0 3px rgba(212,160,23,.18);
+}
+
+.select{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    padding: 12px 44px 12px 14px; /* справа место под стрелку */
+    font-size: 14px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+
+.selectWrap::after{
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid rgba(59,42,0,.7);
+    border-bottom: 2px solid rgba(59,42,0,.7);
+    transform: translateY(-60%) rotate(45deg);
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* disabled */
+.select:disabled{
+    opacity: .7;
+    cursor: not-allowed;
+}
+
+/* ===== ACTIONS ===== */
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* базовая кнопка */
+.btn{
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .06s ease;
+}
+
+/* cancel */
+.cancel{
+    background: transparent;
+    border-color: rgba(224,198,140,.95);
+    color: var(--text-color);
+}
+
+.cancel:hover{
+    border-color: rgba(212,160,23,.55);
+    box-shadow: 0 8px 22px rgba(0,0,0,.06);
+    transform: translateY(-1px);
+}
+
+/* submit */
+.submit{
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 10px 26px rgba(212,160,23,.22);
+}
+
+.submit:hover{
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(212,160,23,.28);
+}
+
+.btn:disabled{
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 520px){
+    .title{ font-size: 20px; }
+    .actions{ flex-direction: column-reverse; }
+    .btn{ width: 100%; }
+}

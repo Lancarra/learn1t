@@ -3,7 +3,7 @@ import styles from './statistics.module.css';
 
 const COLORS = ['#00C49F', '#fa7070'];
 
-export function Statistics({ result }) {
+export function Statistics({ result, variant }) {
     const correct = result?.correctAnswers ?? 0;
     const incorrect = result?.incorrectAnswers ?? 0;
     const total = correct + incorrect || 1;
@@ -13,18 +13,19 @@ export function Statistics({ result }) {
         { name: 'correct', value: correct },
         { name: 'incorrect', value: incorrect },
     ];
-
+    console.log(result);
     return (
         <div className={styles.row}>
             <div>
-                <PieChart width={360} height={300}>
+                <p>{result?.userName}</p>
+                <PieChart width={!variant?360:260} height={!variant?300:200}>
                     <Pie
                         data={data}
                         cx="50%"
                         cy="50%"
-                        innerRadius={60}
-                        outerRadius={100}
-                        paddingAngle={3}
+                        innerRadius={!variant?60:30}
+                        outerRadius={!variant?100:70}
+                        paddingAngle={!variant?3:1}
                         dataKey="value"
                     >
                         {data.map((entry, index) => (
@@ -37,7 +38,7 @@ export function Statistics({ result }) {
             </div>
 
             <div className={styles.sideBox}>
-                <p className={styles.percentText}>You have learned {percent}%</p>
+                <p className={styles.percentText}>Progress: {percent}%</p>
             </div>
         </div>
     );

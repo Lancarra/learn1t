@@ -47,13 +47,21 @@ export const definitionsAPI = createApi({
             }),
             invalidatesTags: ['definitions'],
         }),
-            getDefinitionById:builder.query({
-                query: (definitionId) => ({
-                    method: "GET",
-                    url:`/definition/get-definition-id/${definitionId}`
-                }),
-                providesTags:['definitions'],
-            })
+        getDefinitionById:builder.query({
+            query: (definitionId) => ({
+                method: "GET",
+                url:`/definition/get-definition-id/${definitionId}`
+            }),
+            providesTags:['definitions'],
+        }),
+        addDefinitionImage: builder.mutation({
+            query: ({id, file}) => ({
+                method: "POST",
+                url:`/definition/blob/update/${id}`,
+                body: file
+            }),
+            invalidatesTags: ['definitions'],
+        })
     })
 });
-export const {useGetDefinitionsQuery, useAddDefinitionMutation, useUpdateDefinitionMutation, useDeleteDefinitionMutation, useGetDefinitionByIdQuery} = definitionsAPI;
+export const {useGetDefinitionsQuery, useAddDefinitionMutation, useAddDefinitionImageMutation, useUpdateDefinitionMutation, useDeleteDefinitionMutation, useGetDefinitionByIdQuery} = definitionsAPI;

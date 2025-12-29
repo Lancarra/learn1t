@@ -7,12 +7,19 @@ import styles from "./dictionaryPage.module.css";
 import {DictionaryCardItem} from "../../components/DictionaryCardItem/DictionaryCardItem.jsx";
 import {CreateNewQuizForm} from "../../components/CreateNewQuizForm/CreateNewQuizForm.jsx";
 import {CreateTestForm} from "../../components/CreateTestForm/CreateTestForm.jsx"
+import {CiSearch} from "react-icons/ci";
+import {TestList} from "../../components/TestList/TestList.jsx";
+import {TestsDropdown} from "../../components/TestsDropdown/TestsDropdown.jsx";
+import {useAuth} from "../../hooks/useAuth.js";
+import Speak from "../../components/Speak/Speak.jsx";
+import SpeakSecond from "../../components/Speak2/SpeakSecond.jsx";
+import SpeakWeb from "../../components/SpeakWeb/SpeakWeb.jsx";
 
 export const DictionaryPage = () => {
     const { id } = useParams();
+    const { user:{roleName, name} } = useAuth();
     localStorage.setItem("id", JSON.stringify(id));
     const { data } = useGetDefinitionsQuery(id);
-    const [isShow, setIsShow] = useState(false);
     const [search, setSearch] = useState("");
     const [isShowModal, setIsShowModal] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,8 +29,12 @@ export const DictionaryPage = () => {
     const toggleDefinitionModal = () => setIsShowDefinitionModal(!isShowDefinitionModal);
     const toggleModal = () => setIsShowModal(!isShowModal);
     const handleInputChange = (e) => setSearch(e.target.value);
-    const toggleShow = () => setIsShow(!isShow);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [showTests, setShowTests] = useState(false);
+
+    const toggleTests = () => {
+        setShowTests(!showTests);
+    }
 
     useEffect(() => {
         setIsFlipped(false);
@@ -45,50 +56,55 @@ export const DictionaryPage = () => {
 
     return (
         <>
-            <div className={styles.dashboardPage}>
-                <div className={styles.dashboardContainer}>
-                    <h1 className={styles.dictTitle}>Words in Dictionary</h1>
-
-            <div className={styles.dictToolbar}>
-                <button type="button" onClick={toggleModal}
-                    className={`${styles.dictPill} ${styles.dictPillPrimary}`}>
-                    Create new definition
-                </button>
-                <button type="button" className={styles.dictPill} onClick={toggleDefinitionModal}>
-                    Learn Definitions
-                    </button>
-                <button type="button" className={styles.dictPill} onClick={toggleTestModal}>
-                    Create Test
-                </button>
-                <button type="button" onClick={toggleShow} className={styles.dictPill}>Find definition</button>
-                {isShow && (
-                    <input value ={search} onChange={handleInputChange} className={styles.searchInput} type="text" placeholder="Enter a definition name..."/>
-                )}
-            </div>
-            <div className={styles.dictPreview}>
-            <button type="button" onClick={handlePrev} className={styles.dictArrow}>←</button>
-
-            <div
-                className={`${styles.flipCard}`}
-                onClick={toggleFlip}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleFlip()}
-            >
-                <div className={`${styles.flipInner} ${isFlipped ? styles.flipped : ""}`}>
-                    <div className={styles.flipFront}>
-                        {currentItem?.imageURL  && <img src={currentItem?.imageURL} alt=""/>}
-                        <p className={styles.dictPreviewWord}>{currentItem?.word}</p>
+            <div className={styles["dashboard-page"]}>
+                <div className={styles.container}>
+                    <h1  className={styles["dashboard-greeting"]}>Words in Dictionary</h1>
+                    <p className={styles["header-subtitle"]}>
+                        Create and manage your vocabulary definitions for this dictionary.
+                    </p>
+                    <div className={styles["action-bar"]}>
+                        <div className={styles["action-right"]}>
+                            {roleName !== "Student" && (
+                            <button type="button" onClick={toggleModal}>Create new definition</button>)}
+                            {roleName == "Student" && (
+                            <button type="button" onClick={toggleDefinitionModal}>Learn Definitions</button>)}
+                            {roleName !== "Student" && (
+                            <button type="button" onClick={toggleTestModal}>Create Test</button>)}
+                            <div className={styles["search-wrapper"]}>
+                                <CiSearch className={styles.searchIcon} />
+                                <input value ={search} onChange={handleInputChange} className={styles.searchInput} type="text" placeholder="Enter a definition name..."/>
+                            </div>
+                        </div>
+                        <div className={styles.testsRight}>
+                            <TestsDropdown id={id} />
+                        </div>
                     </div>
-                    <div className={styles.flipBack}>
-                        {currentItem?.imageURL && <img src={currentItem?.imageURL} alt=""/>}
-                        <p className={styles.dictPreviewMeaning}>{currentItem?.meaning}</p>
+                <div className={styles.dictPreview}>
+                    <button type="button" onClick={handlePrev} className={styles.dictArrow}>←</button>
+                    <div className={`${styles.flipCard}`} onClick={toggleFlip} role="button"
+                         tabIndex={0} onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleFlip()}>
+                        <div className={`${styles.flipInner} ${isFlipped ? styles.flipped : ""}`}>
+                            <div className={styles.flipFront}>
+                                {currentItem?.imageURL  && <img src={currentItem?.imageURL} alt=""/>}
+                                <p className={styles.dictPreviewWord}>{currentItem?.word}</p>
+{/*
+                                   <Speak textToSpeak={currentItem?.word} />
+*/}
+{/*
+                                <SpeakSecond textToSpeak={currentItem?.word} />
+*/}
+                                <SpeakWeb
+                                    text={currentItem?.word}
+                                    langKey="en"
+                                />
+                            </div>
+                            <div className={styles.flipBack}>
+                                <p className={styles.dictPreviewMeaning}>{currentItem?.meaning}</p>
+                            </div>
+                        </div>
                     </div>
+                    <button type="button" onClick={handleNext} className={styles.dictArrow}>→</button>
                 </div>
-            </div>
-
-            <button type="button" onClick={handleNext} className={styles.dictArrow}>→</button>
-        </div>
             <ul className={styles.dictList}>
                 {definitions?.map(({ id, word, meaning, blobId, imageURL }) => (
                     <DictionaryCardItem id={id} word={word} meaning={meaning} blobId={blobId} imageURL={imageURL} />
@@ -99,7 +115,7 @@ export const DictionaryPage = () => {
 
             {isShowModal && (
                 <Modal toggleModal={toggleModal}>
-                    <NewDefinitionForm togglemodal={toggleModal} id={id}/>
+                    <NewDefinitionForm togglemodal={toggleModal} id={id} title="Create definition"/>
                 </Modal>
             )}
             {isShowDefinitionModal && <Modal toggleModal={toggleDefinitionModal}>

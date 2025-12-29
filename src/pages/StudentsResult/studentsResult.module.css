@@ -1,0 +1,57 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #3b2a00;
+    --card-bg: #fffaf0;
+    --input-border: #e0c68c;
+    --primary: #d4a017;
+    --primary-hover: #b8860b;
+    --muted-text: #8a7a50;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 32px 24px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.header {
+    margin-bottom: 22px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 6px;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted-text);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+    .page {
+        padding: 16px 20px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+}

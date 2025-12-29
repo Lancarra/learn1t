@@ -18,6 +18,13 @@
     background: var(--bg-color);
     color: var(--text-color);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container {
+    width: 100%;
+    max-width: 1200px;
 }
 
 .headerCard {
@@ -108,18 +115,13 @@
     line-height: 1;
 }
 
-/* ====== CARD BASE ====== */
-
 .card {
     background: var(--card-bg);
-    border-radius: var(--radius-md);
+    border-radius: 16px;
     padding: 20px 24px;
     border: 1px solid var(--input-border);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
-
-/* ====== MODULES HEADER ====== */
-/* Переделываем на flex для лучшего контроля */
 
 .modulesHeader {
     display: flex;
@@ -223,8 +225,39 @@
 }
 
 .moduleItem {
-    list-style: none;
+    display: flex;             /* ← ключ */
+    flex-direction: column;    /* ← ключ */
+    gap: 12px;
+    padding: 18px;
 }
+
+.moduleLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.moduleCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.addButton {
+    margin-top: auto;          /* ← ключ: прижимает вниз */
+    align-self: flex-start;    /* чтобы не растягивалась */
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--input-border);
+    background: transparent;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.addButton:hover {
+    background: color-mix(in srgb, var(--primary) 10%, #fff);
+}
+
 
 .moduleCard {
     display: flex;
@@ -271,58 +304,53 @@
 }
 
 .moduleFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--input-border);
-}
-
-.moduleStats {
+    margin-top: auto;              /* прижимает футер вниз карточки */
     display: flex;
     align-items: center;
+    justify-content: space-between; /* ← КЛЮЧ */
     gap: 16px;
+    padding-top: 12px;
 }
 
 .moduleStat {
     display: flex;
     flex-direction: column;
+    gap: 2px;
 }
 
-.statNumber {
+.moduleStatNumber {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-color);
 }
 
-.statLabel {
-    font-size: 12px;
-    color: var(--muted-text);
+.moduleItem .statLabel {
     text-transform: none;
-    letter-spacing: 0;
-    font-weight: 400;
-    margin: 0;
+    letter-spacing: normal;
+    font-weight: 500;
+    font-size: 13px;
 }
 
-/* кнопка "Add student" */
+
 .addButton {
     padding: 8px 16px;
-    border-radius: 50px;
-    border: 2px solid var(--primary); /* Более толстая рамка */
+    border-radius: 999px;
+    border: 1px solid var(--primary);
     background: transparent;
     color: var(--primary);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
     white-space: nowrap;
+    transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .addButton:hover {
-    background: var(--primary);
-    color: #ffffff;
-    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--primary) 12%, #fff);
+}
+
+.addButton:active {
+    transform: translateY(1px);
 }
 
 /* ====== ADAPTIVE ====== */

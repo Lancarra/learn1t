@@ -5,10 +5,11 @@ import {Modal} from "../../components/Modal/Modal.jsx";
 import {NewModuleForm} from "../../components/NewModuleForm/NewModuleForm.jsx";
 import {useGetModulesQuery} from "../../redux/modules/moduleOperations.js";
 import { ItemCard } from "../../components/ItemCard/ItemCard.jsx";
+import {CiSearch} from "react-icons/ci";
 
 export const Dashboard = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const { user } = useAuth();
+    const { user:{roleName, name} } = useAuth();
     const [isShow, setIsShow] = useState(false);
     const { data } = useGetModulesQuery();
     const [keyWord, setKeyWord] = useState("");
@@ -23,25 +24,57 @@ export const Dashboard = () => {
     return (
         <>
             <div className={styles["dashboard-page"]}>
-                <h1 className={styles["dashboard-greeting"]}>Glad to see you, {user.name}. Here are your modules.</h1>
+                <h1 className={styles["dashboard-greeting"]}>Glad to see you, {name}. Here are your modules.</h1>
 
-                <div className={styles["top-bar"]}>
-                    <button type="button" className={styles["create-button"]} onClick={toggleModal}>Create new module</button>
-                    <button type="button" className={styles["create-button"]} onClick={toggleShow}>Find a module</button>
-                    {isShow && (<input value ={keyWord} onChange={handleInputChange} className={styles.searchInput} type="text" placeholder="Enter a module name..."/>
-                    )}
+                <div className={styles["action-bar"]}>
+                    <div className={styles["action-right"]}>
+                        {roleName === "Admin" && (
+                            <button type="button" onClick={toggleModal}>
+                                Create new module
+                            </button>
+                        )}
+                        {roleName === "Admin;" && (
+                            <button type="button" onClick={toggleModal}>
+                                Create new module
+                            </button>
+                        )}
+                        {roleName === "Teacher" && (
+                            <button type="button" onClick={toggleModal}>
+                                Create new module
+                            </button>
+                        )}
+                        {roleName === "Teacher;" && (
+                            <button type="button" onClick={toggleModal}>
+                                Create new module
+                            </button>
+                        )}
+
+
+                        <div className={styles["search-wrapper"]}>
+                            <CiSearch className={styles.searchIcon} />
+                            <input
+                                value={keyWord}
+                                onChange={handleInputChange}
+                                className={styles.searchInput}
+                                type="text"
+                                placeholder="Search a module name..."
+                            />
+                        </div>
+                    </div>
                 </div>
+
+                <ul className={styles["modules-grid"]}>
+                    {modules?.map(({ name, id }) => (
+                        <ItemCard key={id} id={id} name={name} routeBase="dashboard/module" />
+                    ))}
+                </ul>
             </div>
-            <ul className={styles["modules-grid"]}>
-                {modules?.map(({ name, id }) => (
-                    <ItemCard key={id} id={id} name={name} routeBase="dashboard/module" />
-                ))}
-            </ul>
-            {isOpenModal && (
-                <Modal toggleModal={toggleModal} >
-                    <NewModuleForm togglemodal={toggleModal} title="Create module"/>
-                </Modal>
-            )}
-        </>
+
+        {isOpenModal && (
+            <Modal toggleModal={toggleModal} size="sm">
+                <NewModuleForm togglemodal={toggleModal} title="Create module" />
+            </Modal>
+        )}
+    </>
     );
 };

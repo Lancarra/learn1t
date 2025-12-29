@@ -4,7 +4,6 @@ import {Navigate} from "react-router-dom";
 export const RestrictedRoute = ({component, redirectTo}) => {
     const {loggedIn, user} = useAuth();
     const adminPanel = user.roleName === "Admin;";
-    console.log ("teacher", user.roleName);
     if (adminPanel)
     {
         return <Navigate to={"/admin/panel"}/>

@@ -30,6 +30,13 @@ export const quizAPI = createApi({
             }),
             providesTags:['quiz'],
         }),
+        getDictionaryQuiz: builder.query({
+            query: (dictionaryId) => ({
+                method: "GET",
+                url:`/quiz/get-quiz-by-dictionary-id/${dictionaryId}`
+            }),
+            providesTags:['quiz'],
+        }),
         addQuiz: builder.mutation({
             query: (value) => ({
                 method: "POST",
@@ -69,8 +76,16 @@ export const quizAPI = createApi({
                 body: value
             }),
             invalidatesTags: ['quiz'],
+        }),
+        resultByDictionary: builder.mutation({
+            query: (value) => ({
+                method: "POST",
+                url:"/quiz/result-by-dictionary",
+                body: value
+            }),
+            invalidatesTags: ['quiz'],
         })
 
     })
 });
-export const {useGetQuizQuery, useGetInfoQuizQuery, useAddQuizMutation,  useUpdateQuizMutation, useCheckQuizMutation, useAnswerQuizMutation, useCheckAnswerMutation} = quizAPI;
+export const {useGetQuizQuery, useGetInfoQuizQuery, useResultByDictionaryMutation, useGetDictionaryQuizQuery, useAddQuizMutation,  useUpdateQuizMutation, useCheckQuizMutation, useAnswerQuizMutation, useCheckAnswerMutation} = quizAPI;

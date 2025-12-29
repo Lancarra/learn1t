@@ -1,4 +1,4 @@
-import styles from "../LearnDefinitionPage/learnDefinitionPage.module.css";
+import styles from "./continueLearnDefinitionpage.module.css";
 import {useParams} from "react-router-dom";
 import localStorage from "redux-persist/es/storage";
 import {useCheckAnswerMutation, useGetQuizQuery} from "../../redux/quiz/quizOperations.js";
@@ -78,7 +78,8 @@ export const ContinueLearnDefinitionPage = () => {
     }
 
     const handleInputChange = (event) => {
-        setMyAnswer(event.target.value);
+        const value = event.target.value[0].toUpperCase() + event.target.value.slice(1);
+        setMyAnswer(value.trim());
     }
     return<>
         <div className={styles.lp}>
@@ -98,13 +99,22 @@ export const ContinueLearnDefinitionPage = () => {
                     </div>
                     <div className={styles.word}>{definition?.word}</div>
                 </section>
-               <form onSubmit={handleAnswer}>
-                   <input type="text" placeholder="meaning" onChange={handleInputChange} value={myAnswer} />
-                   <button type = "submit">Next</button>
-               </form>
-                { help && <p style={{opacity: "0.5", userSelect:"none"}}>You need to write this word like this: {definition?.meaning}</p>}
+                <div className={styles.answerWrapper}>
+                    <form className={styles.answerForm} onSubmit={handleAnswer}>
+                        <input className={styles.answerInput} type="text" placeholder="Type the meaning" onChange={handleInputChange} value={myAnswer}
+                            autoFocus/>
+                        <button className={styles.nextButton} type="submit">
+                            Next
+                        </button>
+                    </form>
+                    {help && (
+                        <p className={styles.hint}>
+                            Correct answer: <strong>{definition?.meaning}</strong>
+                        </p>
+                    )}
+                </div>
             </div>
         </div>
-        {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} thirdbutton = "Show result" dictionaryId={cardId} /></Modal>}
+        {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} thirdbutton = "Show result" dictionaryId={cardId} variant = {true} /></Modal>}
     </>
 }

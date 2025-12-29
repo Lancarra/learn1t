@@ -20,7 +20,7 @@ export const NewDictionaryForm = ({togglemodal, title}) => {
         togglemodal();
     }
     return (<form className={styles.form} onSubmit={handleSubmit}>
-        <p>{title}</p>
+        <h2 className={styles.title}>{title}</h2>
         <input className={styles.input} type = "text" placeholder="Enter a dictionary name..." value={dictionary} onChange={handleInputChange} />
         <button className={styles.button} type = "submit">Save</button>
     </form>)

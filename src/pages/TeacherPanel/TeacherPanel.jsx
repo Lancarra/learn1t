@@ -7,6 +7,7 @@ import styles from "./teacherPanel.module.css"
 import {useAuth} from "../../hooks/useAuth.js";
 import {Modal} from "../../components/Modal/Modal.jsx";
 import {NewModuleForm} from "../../components/NewModuleForm/NewModuleForm.jsx";
+import {ModuleListDashboard} from "../../components/ModuleListDashboard/ModuleListDashboard.jsx";
 
 export const TeacherPanel = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
@@ -22,14 +23,14 @@ export const TeacherPanel = () => {
         module.name.toLowerCase().includes(keyWord.toLowerCase())
     ) || [];
     const toggleModal = () => setIsOpenModal(!isOpenModal);
-    console.log(modules)
     return (
         <section className={styles.teacherPanel}>
+            <div className={styles.container}>
             <div className={styles.headerCard}>
                 <div className={styles.teacherInfo}>
                     <div className={styles.avatarWrapper}>
                         {user?.blobId ? (
-                            <img src={user.blobId} alt={user?.username} className={styles.avatarImg}/>
+                            <img src={`http://127.0.0.1:10000/devstoreaccount1/user-images/${user.blobId}`} alt={user?.username} className={styles.avatarImg}/>
                         ) : (
                             <span className={styles.avatarFallback}>
                                 {user?.username?.[0] || "?"}
@@ -80,53 +81,13 @@ export const TeacherPanel = () => {
                 </div>
             </div>
 
-            <ul className={styles.modulesList}>
-                {modulesArray.map((module) => (
-                    <li key={module.id} className={`${styles.card} ${styles.moduleItem}`}>
-                        <NavLink to={`/dashboard/module/${module.id}`} className={styles.moduleCard}>
-                        <div className={styles.moduleCard}>
-                            <div className={styles.moduleHeader}>
-                                <h3 className={styles.moduleTitle}>{module.name}</h3>
-                                <span className={styles.moduleLevelBadge}>
-                                    {module.learnLevel || "All Levels"}
-                                </span>
-                            </div>
-
-                            <p className={styles.moduleDescription}>
-                                {module.description || "No description provided"}
-                            </p>
-
-                            <div className={styles.moduleFooter}>
-                                <div className={styles.moduleStats}>
-                                    <div className={styles.moduleStat}>
-                                        <span className={styles.statNumber}>
-                                            {module.wordCount || "?"}
-                                        </span>
-                                        <span className={styles.statLabel}>words</span>
-                                    </div>
-                                    <div className={styles.moduleStat}>
-                                        <span className={styles.statNumber}>
-                                            {module.studentCount || "0"}
-                                        </span>
-                                        <span className={styles.statLabel}>students</span>
-                                    </div>
-                                </div>
-
-                                <button type="button" className={styles.addButton}>
-                                    Add Students
-                                </button>
-                            </div>
-                        </div>
-                        </NavLink>
-                    </li>
-                ))}
-            </ul>
-
+            <ModuleListDashboard modulesArray={modulesArray}/>
             {isOpenModal && (
                 <Modal toggleModal={toggleModal} >
                     <NewModuleForm togglemodal={toggleModal} title="Create module"/>
                 </Modal>
             )}
+            </div>
         </section>
 
     );

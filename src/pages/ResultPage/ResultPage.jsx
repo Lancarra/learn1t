@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useAnswerQuizMutation} from "../../redux/quiz/quizOperations.js";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import {Statistics} from "../../components/Statistics/Statistics.jsx";
 import styles from "./resultPage.module.css";
 
@@ -9,9 +9,11 @@ export const ResultPage = () => {
     const { cardId } = useParams();
     const [result, setResult] = useState(null);
     const [data, setData] = useState([]);
-/*
-    const [secondData, setSecondData] = useState([]);
-*/
+    const [id] = useState(()=>{
+        const id = JSON.parse(localStorage.getItem('id'));
+        return id;
+    });
+
 
     useEffect(() => {
         const answers = JSON.parse(localStorage.getItem("answer")) ?? [];
@@ -25,9 +27,9 @@ export const ResultPage = () => {
             setResult(res.data.result);
         })();
     }, [cardId, showResultAnswer]);
-
     return (
         <div className={styles["result-page"]}>
+            <NavLink to = {`/dictionary/${id}`}>Back to Dictionary</NavLink>
             <Statistics result={result} />
             <ul className={styles.answers}>
                 {data.map((item, i) => {
