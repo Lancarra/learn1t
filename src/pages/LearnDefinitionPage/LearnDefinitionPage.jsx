@@ -79,7 +79,7 @@ export const LearnDefinitionPage = () => {
                 </ul>
             </div>
         </div>
-            {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} thirdbutton = "Skip the second level quiz" dictionaryId={cardId} /></Modal>}
+            {isShowModal && <Modal toggleModal={toggleModal} size="sm"><FinishQuiz togglemodal={toggleModal} thirdbutton = "Skip the second level quiz" dictionaryId={cardId} /></Modal>}
         </>
     );
 };

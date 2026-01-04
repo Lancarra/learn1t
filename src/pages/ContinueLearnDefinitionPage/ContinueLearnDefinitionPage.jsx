@@ -115,6 +115,6 @@ export const ContinueLearnDefinitionPage = () => {
                 </div>
             </div>
         </div>
-        {isShowModal && <Modal toggleModal={toggleModal}><FinishQuiz togglemodal={toggleModal} thirdbutton = "Show result" dictionaryId={cardId} variant = {true} /></Modal>}
+        {isShowModal && <Modal toggleModal={toggleModal} size="sm"><FinishQuiz togglemodal={toggleModal} thirdbutton = "Show result" dictionaryId={cardId} variant = {true} /></Modal>}
     </>
 }

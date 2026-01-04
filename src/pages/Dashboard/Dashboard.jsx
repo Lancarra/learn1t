@@ -24,6 +24,7 @@ export const Dashboard = () => {
     return (
         <>
             <div className={styles["dashboard-page"]}>
+                <div className={styles.container}>
                 <h1 className={styles["dashboard-greeting"]}>Glad to see you, {name}. Here are your modules.</h1>
 
                 <div className={styles["action-bar"]}>
@@ -68,6 +69,7 @@ export const Dashboard = () => {
                         <ItemCard key={id} id={id} name={name} routeBase="dashboard/module" />
                     ))}
                 </ul>
+            </div>
             </div>
 
         {isOpenModal && (

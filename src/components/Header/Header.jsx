@@ -16,6 +16,8 @@ export const Header = () => {
                     <div className={styles.topbarLeft}>
                         {user.roleName === "Admin" && <Link to="/admin/panel" className={styles.brand}>LearnIT</Link>}
                         {user.roleName === "Admin;" && <Link to="/admin/panel" className={styles.brand}>LearnIT</Link>}
+                        {user.roleName === "Teacher" && <Link to={`/admin/teacher/${user.userId}`} className={styles.brand}>LearnIT</Link>}
+                        {user.roleName === "Teacher;" && <Link to={`/admin/teacher/${user.userId}`} className={styles.brand}>LearnIT</Link>}
                         {user.roleName === "Student" && <Link to="/dashboard" className={styles.brand}>LearnIT</Link>}
                         {user.roleName === "Student;" && <Link to="/dashboard" className={styles.brand}>LearnIT</Link>}
                     </div>

@@ -56,12 +56,19 @@ export const Register = () => {
         setusername("");
         setRole("");
     };
+    const isFormValid =
+        username.trim() !== "" &&
+        email.trim() !== "" &&
+        password.trim() !== "" &&
+        confirmpassword.trim() !== "" &&
+        role.trim() !== "" &&
+        password === confirmpassword;
 
     return (<>
         <div className={styles.authContainer}>
             <form onSubmit={handleSubmit}>
                 <h2 className={styles.formTitle}>Register</h2>
-                <input type="text" placeholder="Username" value={username} onChange={handleChange} name="username"/>
+                <input type="text" placeholder="Name and Surname" value={username} onChange={handleChange} name="username"/>
                 <input type="email" placeholder="Email" value={email} onChange={handleChange} name="email"  pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
                        title="Enter a valid email address (for example, name@example.com)"/>
                 <div className={styles.passwordWrapper}>
@@ -81,8 +88,10 @@ export const Register = () => {
                 </div>
                 <button type="submit" disabled={password !== confirmpassword || password === "" || confirmpassword === ""}>Register</button>
             </form>
-            <p>You have account?</p>
-            <NavLink to = "/login">Login here.</NavLink>
+                <div className={styles.authFooter}>
+                    <p>You have account?</p>
+                    <NavLink to = "/login">Login here.</NavLink>
+                </div>
         </div>
     </>)
 }

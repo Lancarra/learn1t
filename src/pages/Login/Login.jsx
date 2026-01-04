@@ -35,6 +35,8 @@ export const Login = () => {
         setpassword("");
         setemail("");
     }
+    const isLoginValid = email.trim() !== "" && password.trim() !== "";
+
     return (<>
         <div className={styles.authContainer}>
             <form onSubmit={handleSubmit}>
@@ -44,7 +46,7 @@ export const Login = () => {
                     <input type={!showPassword?"password":"text"} placeholder="Password" value={password} onChange={handleChange} name="password" className={styles.passwordInput}/>
                     <button type = "button" onClick={toggleShowPassword}  className={styles.eyeButton}>{!showPassword?<IoIosEye size = {24}/>:<IoIosEyeOff size = {24}/>}</button>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" disabled={!isLoginValid}>Login</button>
             </form>
                 <div className={styles.authFooter}>
                 <span>Don't have account?</span>

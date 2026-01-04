@@ -1,8 +1,9 @@
 import {NavLink} from "react-router-dom";
-import styles from "../../pages/TeacherPanel/teacherPanel.module.css";
+import styles from "./moduleListItem.module.css";
 import {ManageCourseModule} from "../ManageCourseModule/ManageCourseModule.jsx";
 import {useState} from "react";
 import {Modal} from "../Modal/Modal.jsx";
+import {GoFileSubmodule} from "react-icons/go";
 
 export const ModuleListItem = ({id,moduleName, moduleLevel, moduleDescription, studentCount, students}) => {
     const [isShowModal, setShowModal] = useState(false);
@@ -14,6 +15,9 @@ export const ModuleListItem = ({id,moduleName, moduleLevel, moduleDescription, s
     return (
         <li  className={`${styles.card} ${styles.moduleItem}`}>
             <NavLink to={`/dashboard/module/${id}`} className={styles.moduleLink}>
+                <div className={styles.iconBubble}>
+                    <GoFileSubmodule className={styles.icon} />
+                </div>
                 <div className={styles.moduleHeader}>
                     <h3 className={styles.moduleTitle}>{moduleName}</h3>
                     <span className={styles.moduleLevelBadge}>

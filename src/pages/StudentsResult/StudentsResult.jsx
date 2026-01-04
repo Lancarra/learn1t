@@ -35,9 +35,25 @@ export const StudentsResult = () => {
                     </p>
                 </div>
 
-                <div className={styles.list}>
+                <div className={styles.table}>
+                    <div className={styles.head}>
+                        <div className={styles.th}>Student</div>
+                        <div className={styles.th}>Result</div>
+                        <div className={styles.th}>Progress</div>
+                    </div>
+
                     {result.map((res, idx) => (
-                        <Statistics variant={true} result={res} key={idx} />
+                        <div className={styles.tr} key={idx}>
+                            <div className={styles.tdStudent}>Student name: {res?.userName}</div>
+
+                            <div className={styles.tdChart}>
+                                <Statistics variant={true} result={res} mode="chart" />
+                            </div>
+
+                            <div className={styles.tdProgress}>
+                                <Statistics variant={true} result={res} mode="progress" />
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

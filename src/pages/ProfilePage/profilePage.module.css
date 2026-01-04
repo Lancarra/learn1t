@@ -89,6 +89,13 @@
     color: var(--text-color);
     font-size: 15px;
 }
+.label {
+    min-width: 140px;         /* чтобы все строки были ровные */
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-color);
+    white-space: nowrap;
+}
 
 .profileField input {
     padding: 10px 12px;

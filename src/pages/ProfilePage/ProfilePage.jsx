@@ -64,16 +64,6 @@ export const ProfilePage = () => {
 
                 <ul className={styles.profileIcons}>
                     {icons.map(({ id, src }) => (
-                       /* <li key={id} className={styles.profileIconItem} onClick={handleAvatarChange}>
-                            <img src={src} alt="" onClick={(e) => {
-                                setAvatar(e.currentTarget.src)
-                                const formData = new FormData();
-                                formData.append("file", e.currentTarget.src);
-                                updateProfileBlob(
-                                    {id: user.userId, file: formData}
-                                )
-                            }} />
-                        </li>*/
                         <li
                             key={id}
                             className={styles.profileIconItem}
@@ -96,6 +86,8 @@ export const ProfilePage = () => {
                                     formData.append("file", file);
 
                                     updateProfileBlob({ id: user.userId, file: formData });
+                                    toast.success("Photo uploaded successfully. Please refresh the page.");
+
                                 }}
                             />
                         </li>
@@ -113,7 +105,7 @@ export const ProfilePage = () => {
                                     const reader = new FileReader();
                                     reader.onloadend = () => setAvatar(reader.result);
                                     reader.readAsDataURL(file);
-
+                                    toast.success("Photo uploaded successfully. Please refresh the page.");
                                 }
                             }}
                             />
@@ -144,7 +136,7 @@ export const ProfilePage = () => {
                     />
                 </div>
 
-                <div className={styles.profileField}>
+                {/*<div className={styles.profileField}>
                     <label>Password</label>
                     <input
                         type="text"
@@ -152,16 +144,16 @@ export const ProfilePage = () => {
                         value={password}
                         onChange={handleInputChange}
                     />
+                </div>*/}
+
+                <div className={styles.profileField}>
+                    <span className={styles.label}>User Role</span>
+                    <span className={styles.value}>{role}</span>
                 </div>
 
                 <div className={styles.profileField}>
-                    <label>User Role</label>
-                    <input type="text" name="userRole" value={role} readOnly />
-                </div>
-
-                <div className={styles.profileField}>
-                    <label>Achievement</label>
-                    <input type="text" name="achievement" value={achievement} readOnly />
+                    <span className={styles.label}>Achievement</span>
+                    <span className={styles.value}>{achievement}</span>
                 </div>
 
                 <button type="submit" className={styles.profileSubmit}>

@@ -1,4 +1,3 @@
-/* контейнер всей страницы */
 .authContainer {
     min-height: 80vh;
     display: grid;
@@ -8,7 +7,6 @@
     background: var(--bg-color);
 }
 
-/* форма */
 .authContainer form {
     background: var(--card-bg);
     padding: 2rem;
@@ -53,21 +51,30 @@
 
 .eyeButton {
     position: absolute;
-    top: 50%;
     right: 14px;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
     padding: 0;
     background: transparent;
-    border: none;
     color: var(--text-color);
     cursor: pointer;
+
+    line-height: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    transform: none;
 }
 
-.eyeButton:hover {
+.eyeButton:hover,
+.eyeButton:focus,
+.eyeButton:active {
     background: transparent;
+    outline: none;
 }
 
 .selectWrapper {
@@ -108,6 +115,20 @@
 
 .select option[value=""] {
     color: #999;
+}
+.authContainer form > button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--primary);
+    transform: none;
+}
+
+.authContainer form > button:disabled:hover {
+    background-color: var(--primary);
+}
+
+.authContainer form > button:disabled:active {
+    transform: none;
 }
 
 .authContainer form > button {
@@ -151,5 +172,29 @@
 }
 
 .authContainer > a:hover {
+    text-decoration: underline;
+}
+.authFooter {
+    text-align: center;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+.authFooter p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.authFooter a {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.authFooter a:hover {
     text-decoration: underline;
 }

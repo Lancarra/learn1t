@@ -20,7 +20,6 @@ export const AssignTeacher = ({ studentId, toggleModal }) => {
     }, [data, teacher]);
 
     const getErrorMessage = (err) => {
-        // RTK Query часто кладёт текст сюда
         const raw =
             err?.data?.message ||
             err?.data?.error ||
@@ -30,7 +29,6 @@ export const AssignTeacher = ({ studentId, toggleModal }) => {
 
         const text = String(raw).toLowerCase();
 
-        // кейс "уже назначен"
         if (
             text.includes("already") ||
             text.includes("exists") ||
@@ -59,7 +57,7 @@ export const AssignTeacher = ({ studentId, toggleModal }) => {
                 teacherId: selected.userId,
                 operation: "Add",
                 studentsId: [studentId],
-            }).unwrap(); // важно для catch
+            }).unwrap();
 
             toast.success("Teacher successfully assigned.");
             toggleModal?.();

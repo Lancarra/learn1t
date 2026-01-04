@@ -5,18 +5,17 @@ import { PiStudent } from "react-icons/pi";
 import styles from "./adminStudents.module.css"
 import {Modal} from "../../components/Modal/Modal.jsx";
 import {AssignTeacher} from "../../components/AssignTeacher/AssignTeacher.jsx";
+import AdminStudentItem from "../../components/AdminStudentItem/AdminStudentItem.jsx";
 
 export const AdminStudents = () => {
     const {data:students} = useGetStudentsQuery();
     const [keyWord, setKeyWord] = useState("");
-    const [isOpenModal, setIsOpenModal] = useState(false);
-    const toggleModal = () => {
-        setIsOpenModal(!isOpenModal);
-    }
+
     const handleInputChange = (e) => {
         setKeyWord(e.target.value);
     }
     const studentsArray = students?.students?.filter((student)=>student.username.toLowerCase().includes(keyWord.toLowerCase())) || [];
+    console.log(studentsArray)
     return (
         <section className={styles.studentsPage}>
             <div className={styles.container}>
@@ -56,35 +55,7 @@ export const AdminStudents = () => {
 
                 <ul className={styles.list}>
                     {studentsArray.map((student) => (
-                        <li className={styles.listItem} key={student.userId}>
-                            <div className={styles.studentInfo}>
-                                <div className={styles.avatarWrapper}>
-                                    {student.blobId ? (
-                                        <img
-                                            src={`http://127.0.0.1:10000/devstoreaccount1/user-images/${student.blobId}`}
-                                            alt={student.username}
-                                            className={styles.avatarImg}
-                                        />
-                                    ) : (
-                                        <span className={styles.avatarFallback}>
-                                            <PiStudent />
-                                        </span>
-                                    )}
-                                </div>
-
-                                <div>
-                                    <p className={styles.studentName}>{student.username}</p>
-                                    <p className={styles.studentEmail}>{student.email}</p>
-                                </div>
-                            </div>
-
-                            <div className={styles.actions}>
-                                <button className={styles.assignButton} onClick={toggleModal}>Assign Teacher</button>
-                            </div>
-                            {isOpenModal && <Modal toggleModal={toggleModal} >
-                                <AssignTeacher studentId = {student.userId} />
-                            </Modal>}
-                        </li>
+                       <AdminStudentItem key={student.userId} student={student} />
                     ))}
                 </ul>
             </div>

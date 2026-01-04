@@ -44,29 +44,43 @@
 .passwordWrapper {
     position: relative;
     width: 100%;
+    height: 44px;
 }
 
 .passwordInput {
+    height: 100%;
+    width: 100%;
     padding-right: 50px;
+    box-sizing: border-box;
+    outline: none;
 }
 
 .eyeButton {
     position: absolute;
-    top: 50%;
     right: 14px;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
     padding: 0;
     background: transparent;
-    border: none;
     color: var(--text-color);
     cursor: pointer;
+
+    line-height: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    transform: none;
 }
 
-.eyeButton:hover {
+.eyeButton:hover,
+.eyeButton:focus,
+.eyeButton:active {
     background: transparent;
+    outline: none;
 }
 
 .authContainer form > button {
@@ -81,6 +95,20 @@
     cursor: pointer;
     box-sizing: border-box;
     transition: background-color 0.2s ease, transform 0.06s ease;
+}
+.authContainer form > button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--primary);
+    transform: none;
+}
+
+.authContainer form > button:disabled:hover {
+    background-color: var(--primary);
+}
+
+.authContainer form > button:disabled:active {
+    transform: none;
 }
 
 .authContainer form > button:hover {

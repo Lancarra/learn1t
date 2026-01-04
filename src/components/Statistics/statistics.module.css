@@ -1,49 +1,117 @@
+/* ====== БАЗОВЫЕ ПЕРЕМЕННЫЕ (на случай если root не подключён в этом scope) ====== */
 :root {
     --radius: 16px;
-
-    --bg-color: #ffffff;
     --text-color: #3b2a00;
+    --muted-text: #8a7a50;
     --card-bg: #fffaf0;
     --primary: #d4a017;
-    --primary-hover: #b8860b;
-    --input-bg: #fffdf7;
-    --input-border: #e0c68c;
-    --link-color: #996515;
-    --icon-color: #b8860b;
-    --muted: #6b4e16;
-    --shadow: 0 10px 25px rgba(0, 0, 0, .08);
-    --shadow-hover: 0 12px 30px rgba(0, 0, 0, .10);
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
+/* ====== FULL MODE (как было: имя + диаграмма + прогресс) ====== */
 .row {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 36px;
-    margin-left: 350px;
 }
 
+/* левый блок (имя + chart) */
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.studentName {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* ====== BOX справа (progress) ====== */
 .sideBox {
     background: #fff3d9;
     border-radius: var(--radius);
     padding: 18px 22px;
     min-width: 360px;
     box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
 }
 
+/* общий текст процентов */
 .percentText {
     margin: 0;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.35;
     color: var(--text-color);
+    font-weight: 500;
 }
 
-/* адаптив: текст под кругом на узких экранах */
+/* ====== MODE: chartOnly ====== */
+.chartBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* ====== MODE: progressOnly ====== */
+.progressBox {
+    background: #fff3d9;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    min-width: 360px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ====== recharts tweaks (легенда / тултип) ====== */
+
+/* легенда компактнее и по центру */
+:global(.recharts-legend-wrapper) {
+    margin-top: 6px;
+}
+
+:global(.recharts-default-legend) {
+    display: flex !important;
+    justify-content: center;
+    gap: 12px;
+}
+
+:global(.recharts-legend-item-text) {
+    font-size: 12px;
+    color: var(--muted-text);
+}
+
+/* тултип аккуратнее */
+:global(.recharts-tooltip-wrapper) {
+    outline: none;
+}
+
+:global(.recharts-default-tooltip) {
+    border-radius: 12px !important;
+    border: 1px solid rgba(224, 198, 140, 0.9) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ====== ADAPTIVE ====== */
 @media (max-width: 900px) {
     .row {
         flex-direction: column;
         align-items: stretch;
+        gap: 16px;
     }
-    .sideBox {
+
+    .sideBox,
+    .progressBox {
         min-width: 0;
+        width: 100%;
+        justify-content: center;
     }
 }

@@ -2,8 +2,10 @@ import {useGetDictionaryQuizQuery} from "../../redux/quiz/quizOperations.js"
 import {NavLink} from "react-router-dom";
 import {useEffect, useMemo, useState} from "react";
 import styles from "./testList.module.css";
+import {useAuth} from "../../hooks/useAuth.js";
 
 export const TestList = ({id}) => {
+    const { user } = useAuth();
     const {data} = useGetDictionaryQuizQuery(id);
     const testCards = data?.testCards ?? [];
     const pageSize = 10;
@@ -50,7 +52,7 @@ export const TestList = ({id}) => {
                                 <p className={styles.name}>Name: {name}</p>
                                 <p className={styles.userName}>User Name: {userName}</p>
                             </NavLink>
-                            <NavLink to={`/test/info/answers/${cardId}`}>Show Results</NavLink>
+                            {user.roleName !== "Student" && (<NavLink to={`/test/info/answers/${cardId}`}>Show Results</NavLink>)}
                         </li>
                     }
                 }
