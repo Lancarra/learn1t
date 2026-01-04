@@ -3,11 +3,21 @@ import {AssignTeacher} from "../AssignTeacher/AssignTeacher.jsx";
 import {useState} from "react";
 import styles from "../../pages/AdminStudents/adminStudents.module.css"
 import {Modal} from "../Modal/Modal.jsx";
+import {useDeleteUserMutation} from "../../redux/admin/AdminList.js";
+import {toast} from "react-toastify";
 
 const AdminStudentItem = ({ student }) => {
+    const [deleteUser] = useDeleteUserMutation();
     const [isOpenModal, setIsOpenModal] = useState(false);
     const toggleModal = () => {
         setIsOpenModal(!isOpenModal);
+    }
+    const handleDelete = async () => {
+        await deleteUser({
+            userId: student.userId,
+            email: student.email,
+        })
+        toast.success("Student successfully deleted.");
     }
     return  <li className={styles.listItem} key={student.userId}>
         <div className={styles.studentInfo}>
@@ -16,12 +26,10 @@ const AdminStudentItem = ({ student }) => {
                     <img
                         src={`http://127.0.0.1:10000/devstoreaccount1/user-images/${student.blobId}`}
                         alt={student.username}
-                        className={styles.avatarImg}
-                    />
-                ) : (
+                        className={styles.avatarImg}/>) : (
                     <span className={styles.avatarFallback}>
-                                            <PiStudent />
-                                        </span>
+                        <PiStudent />
+                    </span>
                 )}
             </div>
 
@@ -33,7 +41,9 @@ const AdminStudentItem = ({ student }) => {
 
         <div className={styles.actions}>
             <button className={styles.assignButton} onClick={toggleModal}>Assign Teacher</button>
+            <button className={styles.deleteButton} type="button" onClick={handleDelete}>Delete</button>
         </div>
+
         {isOpenModal && <Modal toggleModal={toggleModal} >
             <AssignTeacher studentId = {student.userId} />
         </Modal>}

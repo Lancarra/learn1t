@@ -190,6 +190,7 @@
 }
 
 .assignButton {
+    margin-right: 20px;
     border: 1px solid var(--input-border);
     background: var(--primary);
     padding: 8px 16px;
@@ -203,7 +204,20 @@
     background: var(--primary);
     border-color: var(--primary);
 }
-
+.deleteButton{
+    border: 1px solid var(--input-border);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+    background: color-mix(in srgb, #ef4444 12%, #fff);
+    border-color: color-mix(in srgb, #ef4444 30%, #fff);
+    color: #8a1b1b;
+}
+.deleteButton:hover {
+    background: color-mix(in srgb, #ef4444 18%, #fff);
+}
 
 @media (max-width: 768px) {
     .studentsPage {

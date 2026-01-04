@@ -1,10 +1,7 @@
 import {useGetStudentsQuery} from "../../redux/admin/AdminList.js";
 import {useState} from "react";
 import { CiSearch } from "react-icons/ci";
-import { PiStudent } from "react-icons/pi";
 import styles from "./adminStudents.module.css"
-import {Modal} from "../../components/Modal/Modal.jsx";
-import {AssignTeacher} from "../../components/AssignTeacher/AssignTeacher.jsx";
 import AdminStudentItem from "../../components/AdminStudentItem/AdminStudentItem.jsx";
 
 export const AdminStudents = () => {
@@ -15,7 +12,6 @@ export const AdminStudents = () => {
         setKeyWord(e.target.value);
     }
     const studentsArray = students?.students?.filter((student)=>student.username.toLowerCase().includes(keyWord.toLowerCase())) || [];
-    console.log(studentsArray)
     return (
         <section className={styles.studentsPage}>
             <div className={styles.container}>
@@ -24,11 +20,7 @@ export const AdminStudents = () => {
                     <h1 className={styles.title}>Students</h1>
                     <p className={styles.subtitle}>Manage all students in the system</p>
                 </div>
-
-
             </div>
-
-            {/* Main card */}
             <div className={`${styles.card} ${styles.studentsCard}`}>
                 <div className={styles.cardHeader}>
                     <div>
@@ -39,8 +31,6 @@ export const AdminStudents = () => {
                             View and manage student information
                         </p>
                     </div>
-
-                    {/* Search */}
                     <div className={styles.searchWrapper}>
                         <CiSearch className={styles.searchIcon} />
                         <input
@@ -52,7 +42,6 @@ export const AdminStudents = () => {
                         />
                     </div>
                 </div>
-
                 <ul className={styles.list}>
                     {studentsArray.map((student) => (
                        <AdminStudentItem key={student.userId} student={student} />

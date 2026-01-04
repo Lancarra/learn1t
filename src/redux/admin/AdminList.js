@@ -44,8 +44,16 @@ export const adminAPI = createApi({
                 body: value
             }),
             invalidatesTags:['admin'],
+        }),
+        deleteUser: builder.mutation({
+            query: (value) => ({
+                method: "DELETE",
+                url:`/users/delete-user`,
+                body: value
+            }),
+            invalidatesTags:['admin'],
         })
     })
 
 });
-export const {useGetTeachersQuery, useGetStudentsQuery, useGetUserByIdQuery, usePutAssignStudentMutation} = adminAPI;
+export const {useGetTeachersQuery, useGetStudentsQuery, useGetUserByIdQuery, usePutAssignStudentMutation, useDeleteUserMutation} = adminAPI;
